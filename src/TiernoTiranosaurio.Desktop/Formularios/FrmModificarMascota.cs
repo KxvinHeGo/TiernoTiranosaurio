@@ -26,7 +26,7 @@ public class FrmModificarMascota : Form
         txtNombre = new TextBox { Location = new Point(110, 90), Width = 200, MaxLength = 50 };
         cboTipo = new ComboBox { Location = new Point(110, 125), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
         txtRaza = new TextBox { Location = new Point(110, 160), Width = 200, MaxLength = 50 };
-        nudEdad = new NumericUpDown { Location = new Point(110, 195), Width = 80, Minimum = 0, Maximum = 50 };
+        nudEdad = new NumericUpDown { Location = new Point(110, 195), Width = 80, Minimum = 0, Maximum = 300 };
         txtPrecio = new TextBox { Location = new Point(110, 230), Width = 140 };
         btnGuardar = Ui.Boton("Guardar cambios", 110, 275, (s, e) => Guardar(), 130);
         dgv = Ui.Grilla(330, 15, 475, 390);
@@ -43,7 +43,7 @@ public class FrmModificarMascota : Form
             Ui.Etiqueta("Nombre:", 15, 90), txtNombre,
             Ui.Etiqueta("Tipo:", 15, 125), cboTipo,
             Ui.Etiqueta("Raza:", 15, 160), txtRaza,
-            Ui.Etiqueta("Edad (años):", 15, 195), nudEdad,
+            Ui.Etiqueta("Edad (meses):", 15, 195), nudEdad,
             Ui.Etiqueta("Precio:", 15, 230), txtPrecio,
             btnGuardar,
             new Label { Text = "También puedes hacer clic en una mascota de la tabla.", Location = new Point(15, 320),
@@ -106,6 +106,7 @@ public class FrmModificarMascota : Form
     {
         if (codigoActual < 0) { Ui.Aviso("Primero busca la mascota que quieres cambiar.", txtBuscar); return; }
         if (txtNombre.Text.Trim() == "") { Ui.Aviso("El nombre es obligatorio.", txtNombre); return; }
+        if (txtRaza.Text.Trim() == "") { Ui.Aviso("La raza es obligatoria.", txtRaza); return; }
         if (cboTipo.SelectedValue == null) { Ui.Aviso("Selecciona el tipo de mascota.", cboTipo); return; }
         if (!Ui.LeerPrecio(txtPrecio, out decimal precio)) return;
 

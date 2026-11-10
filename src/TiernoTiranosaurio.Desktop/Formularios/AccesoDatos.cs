@@ -7,7 +7,7 @@ namespace TiernoTiranosaurio.Desktop;
 /// Ayudante de datos de los formularios de Arturo (Integrante 2).
 /// Todas las consultas van con SqlParameter: nunca se concatena texto del usuario en el SQL.
 ///
-/// La conexión la da DataBase.cs (Kevin), que lee la cadena de conexion.json de cada PC.
+/// La conexión la da DataBase.cs (Kevin), que lee el conexion.json de cada PC.
 /// </summary>
 internal static class AccesoDatos
 {
@@ -33,6 +33,16 @@ internal static class AccesoDatos
         cmd.Parameters.AddRange(parametros);
         cn.Open();
         return cmd.ExecuteNonQuery();
+    }
+
+    /// <summary>Ejecuta y devuelve un solo valor (ej: el código de la mascota recién creada).</summary>
+    public static object EjecutarEscalar(string sql, params SqlParameter[] parametros)
+    {
+        using SqlConnection cn = Conexion();
+        using SqlCommand cmd = new SqlCommand(sql, cn);
+        cmd.Parameters.AddRange(parametros);
+        cn.Open();
+        return cmd.ExecuteScalar();
     }
 
     // ---------- Consultas que comparten varios formularios ----------

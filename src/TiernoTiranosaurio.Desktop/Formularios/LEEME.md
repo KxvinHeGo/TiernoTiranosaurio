@@ -13,8 +13,8 @@ Todo el SQL usa `SqlParameter`. `Retirar` es `DELETE` porque el contrato dice qu
 
 ## Conexión
 
-`AccesoDatos.cs` arma la conexión con la cadena del README **mientras llega `DataBase.cs`**.
-Cuando Kevin lo suba, solo se cambia el método `Conexion()` de `AccesoDatos.cs` para que use `DataBase`.
+`AccesoDatos.cs` usa `DataBase.ObtenerConexion()`, que lee el `conexion.json` de cada PC.
+La edad se maneja en **meses** (0 a 300), como en la BD.
 
 ## Probar un formulario suelto
 
