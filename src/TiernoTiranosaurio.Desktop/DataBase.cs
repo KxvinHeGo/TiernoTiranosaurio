@@ -1,5 +1,4 @@
 using System.Data;
-using System.Text.Json;
 using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Desktop;
@@ -7,9 +6,8 @@ namespace TiernoTiranosaurio.Desktop;
 /// <summary>
 /// Conexión manual a la base de datos (ADO.NET con SqlConnection). Responsable: Kevin (Integrante 1).
 ///
-/// La cadena de conexión NO está escrita en el código: se lee del archivo conexion.json,
+/// La cadena de conexión NO está escrita en el código: se lee de conexion.json (ver Configuracion.cs),
 /// que cada integrante tiene en su PC con el nombre de SU servidor (ese archivo no se sube a GitHub).
-/// Para crearlo: copiar conexion.ejemplo.json → conexion.json y cambiar el Server.
 ///
 /// Uso:
 ///   using SqlConnection cn = DataBase.ObtenerConexion();
@@ -19,18 +17,13 @@ namespace TiernoTiranosaurio.Desktop;
 /// </summary>
 public static class DataBase
 {
-    private const string ArchivoConfig = "conexion.json";
-
-    // Se lee una sola vez, la primera vez que alguien pide una conexión.
-    private static readonly Lazy<string> cadena = new(LeerCadena);
-
     /// <summary>Cadena de conexión que se está usando (útil para mostrar errores).</summary>
-    public static string CadenaConexion => cadena.Value;
+    public static string CadenaConexion => Configuracion.CadenaConexion;
 
     /// <summary>Crea una conexión NUEVA y CERRADA. Siempre usarla con "using".</summary>
     public static SqlConnection ObtenerConexion()
     {
-        return new SqlConnection(cadena.Value);
+        return new SqlConnection(Configuracion.CadenaConexion);
     }
 
     /// <summary>Ejecuta un SELECT y devuelve las filas en un DataTable.</summary>
@@ -78,24 +71,5 @@ public static class DataBase
         {
             return ex.Message;
         }
-    }
-
-    private static string LeerCadena()
-    {
-        string ruta = Path.Combine(AppContext.BaseDirectory, ArchivoConfig);
-
-        if (!File.Exists(ruta))
-            throw new InvalidOperationException(
-                "No se encontró el archivo " + ArchivoConfig + ".\n\n" +
-                "Copien conexion.ejemplo.json, renómbrenlo a conexion.json (en la carpeta del proyecto Desktop), " +
-                "pongan el nombre de su servidor SQL y vuelvan a compilar.");
-
-        using JsonDocument json = JsonDocument.Parse(File.ReadAllText(ruta));
-        string valor = json.RootElement.GetProperty("CadenaConexion").GetString();
-
-        if (string.IsNullOrWhiteSpace(valor))
-            throw new InvalidOperationException("La propiedad CadenaConexion de " + ArchivoConfig + " está vacía.");
-
-        return valor;
     }
 }
