@@ -46,3 +46,6 @@ Desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# ===== Conexión a la BD de cada PC (cada uno tiene la suya) =====
+conexion.json
