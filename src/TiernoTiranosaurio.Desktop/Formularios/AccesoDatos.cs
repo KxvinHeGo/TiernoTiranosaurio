@@ -7,21 +7,11 @@ namespace TiernoTiranosaurio.Desktop;
 /// Ayudante de datos de los formularios de Arturo (Integrante 2).
 /// Todas las consultas van con SqlParameter: nunca se concatena texto del usuario en el SQL.
 ///
-/// TEMPORAL: mientras Kevin sube DataBase.cs, la conexión se arma aquí con la cadena del README.
-/// Cuando DataBase.cs exista, solo hay que cambiar el método Conexion() para que use la suya
-/// (ej:  return DataBase.ObtenerConexion();)  y borrar la constante Cadena.
+/// La conexión la da DataBase.cs (Kevin), que lee la cadena de conexion.json de cada PC.
 /// </summary>
 internal static class AccesoDatos
 {
-    // Cadena de desarrollo acordada en el README. Si tu SQL Server tiene otro nombre,
-    // cámbiala SOLO en tu PC y no subas ese cambio.
-    private const string Cadena =
-        @"Server=localhost\SQLEXPRESS;Database=TiernoTiranosaurio;Trusted_Connection=True;TrustServerCertificate=True;";
-
-    private static SqlConnection Conexion()
-    {
-        return new SqlConnection(Cadena);
-    }
+    private static SqlConnection Conexion() => DataBase.ObtenerConexion();
 
     /// <summary>Ejecuta un SELECT y devuelve las filas en un DataTable.</summary>
     public static DataTable Consultar(string sql, params SqlParameter[] parametros)
