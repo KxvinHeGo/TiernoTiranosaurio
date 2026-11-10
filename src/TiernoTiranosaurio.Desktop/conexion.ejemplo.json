@@ -1,0 +1,7 @@
+{
+  "_instrucciones": "Copien este archivo como conexion.json (misma carpeta) y cambien el Server por el de su SQL Server. conexion.json NO se sube a GitHub.",
+  "_ejemplos_server": "localhost  |  localhost\\SQLEXPRESS  |  (localdb)\\MSSQLLocalDB  |  NOMBRE-PC\\SQLEXPRESS",
+  "CadenaConexion": "Server=localhost\\SQLEXPRESS;Database=TiernoTiranosaurio;Trusted_Connection=True;TrustServerCertificate=True;",
+  "_ejemplos_url": "Local: https://localhost:7100/   |   Azure: https://NOMBRE-DE-LA-API.azurewebsites.net/",
+  "UrlApi": "https://localhost:7100/"
+}

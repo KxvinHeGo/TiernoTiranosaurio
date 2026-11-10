@@ -12,4 +12,13 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TiernoTiranosaurio.Modelo\TiernoTiranosaurio.Modelo.csproj" />
+  </ItemGroup>
+
+  <!-- Cadena de conexión de cada PC (no se sube a GitHub). Se copia junto al .exe al compilar. -->
+  <ItemGroup>
+    <None Update="conexion.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

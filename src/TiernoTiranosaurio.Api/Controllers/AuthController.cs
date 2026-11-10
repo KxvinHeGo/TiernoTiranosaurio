@@ -1,29 +1,32 @@
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using TiernoTiranosaurio.Api.Datos;
+using TiernoTiranosaurio.Modelo;
 
 namespace TiernoTiranosaurio.Api.Controllers;
 
-// TODO (Integrante 1): validar contra la tabla Usuarios de la base de datos.
-// Contrato acordado en la Fase 0 (ver README.md):
-//   Petición:   POST /api/auth/login   { "usuario": "admin", "clave": "1234" }
-//   Respuesta:  200 { "usuario": "admin", "rol": "Administrador" }
-//               401 si el usuario o la clave no son válidos
+// POST api/auth/login  →  200 { usuario, rol }  |  401
 [ApiController]
-[Route("api/[controller]")]
-public class AuthController : ControllerBase
+[Route("api/auth")]
+public class AuthController(BaseDatos bd) : ControllerBase
 {
     [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginRequest request)
+    public ActionResult<LoginResponse> Login([FromBody] LoginRequest request)
     {
-        // Respuesta temporal para que el escritorio pueda probar el login antes de tener la BD.
-        if (request.Usuario == "admin" && request.Clave == "1234")
-            return Ok(new LoginResponse(request.Usuario, "Administrador"));
+        if (string.IsNullOrWhiteSpace(request.Usuario) || string.IsNullOrWhiteSpace(request.Clave))
+            return Unauthorized();
 
-        if (request.Usuario == "vendedor" && request.Clave == "1234")
-            return Ok(new LoginResponse(request.Usuario, "Vendedor"));
+        // La clave se compara cifrada (SHA-256), igual que como se guardó en el script.
+        // IMPORTANTE: @clave debe ser VARCHAR (no NVARCHAR); si no, el hash sale distinto.
+        var usuarios = bd.Consultar(
+            @"SELECT NombreUsuario, Rol
+              FROM Usuarios
+              WHERE NombreUsuario = @usuario AND Clave = HASHBYTES('SHA2_256', @clave)",
+            dr => new LoginResponse { Usuario = dr.GetString(0), Rol = dr.GetString(1) },
+            new SqlParameter("@usuario", SqlDbType.VarChar, 30) { Value = request.Usuario.Trim() },
+            new SqlParameter("@clave", SqlDbType.VarChar, 100) { Value = request.Clave });
 
-        return Unauthorized();
+        return usuarios.Count == 1 ? Ok(usuarios[0]) : Unauthorized();
     }
 }
-
-public record LoginRequest(string Usuario, string Clave);
-public record LoginResponse(string Usuario, string Rol);

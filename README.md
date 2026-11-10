@@ -5,7 +5,7 @@ Proyecto de la Semana de Ingeniería. Sistema de gestión para la tienda de masc
 - **Base de datos** SQL Server (local para desarrollo y Azure SQL para la demo).
 - **API REST** publicada en Azure para el control de acceso (login y roles).
 - **App de escritorio** Windows Forms (MDI) con conexión manual a la BD.
-- **App web** con consulta, maestro-detalle y vista.
+- **App web** (Blazor) con consulta, maestro-detalle y vista, que obtiene los datos desde la API.
 
 Todo en **.NET 8** con **Visual Studio 2022**.
 
@@ -18,6 +18,7 @@ TiernoTiranosaurio/
 ├── database/                         ← Kevin (ÚNICO que lo modifica)
 ├── docs/                             ← Diagramas, capturas, guion de la demo
 ├── src/
+│   ├── TiernoTiranosaurio.Modelo/    ← Kevin (clases compartidas: Mascota, TipoMascota, Cliente...)
 │   ├── TiernoTiranosaurio.Api/       ← Kevin
 │   ├── TiernoTiranosaurio.Desktop/   ← Kevin (Login, Menu, DataBase) y Arturo (formularios hijos)
 │   └── TiernoTiranosaurio.Web/       ← Juan
@@ -62,7 +63,9 @@ TiernoTiranosaurio/
 
 Usuarios de prueba: `admin` / `1234` (Administrador) y `vendedor` / `1234` (Vendedor).
 
-### API de login
+### API
+
+📄 **El contrato completo de la API está en [docs/CONTRATO_API.md](docs/CONTRATO_API.md).** Resumen del login:
 
 ```
 POST /api/auth/login
