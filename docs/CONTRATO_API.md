@@ -28,7 +28,7 @@ Las clases viven en **un solo proyecto compartido**. La API, la Web y el Escrito
 ### `Mascota`
 | Propiedad | Tipo C# | Columna SQL | Notas |
 |---|---|---|---|
-| `Codigo` | `int` | `Codigo` INT PK | |
+| `Codigo` | `int` | `Codigo` INT PK IDENTITY | se genera solo (desde 101) |
 | `Nombre` | `string` | `Nombre` VARCHAR(50) | |
 | `IdTipo` | `int` | `IdTipo` INT FK | → `TipoMascota.IdTipo` |
 | `Raza` | `string` | `Raza` VARCHAR(50) | |
@@ -40,13 +40,13 @@ Las clases viven en **un solo proyecto compartido**. La API, la Web y el Escrito
 ### `TipoMascota`
 | Propiedad | Tipo C# | Columna SQL |
 |---|---|---|
-| `IdTipo` | `int` | `IdTipo` INT PK |
+| `IdTipo` | `int` | `IdTipo` INT PK IDENTITY |
 | `Nombre` | `string` | `Nombre` VARCHAR(30) |
 
 ### `Cliente`
 | Propiedad | Tipo C# | Columna SQL |
 |---|---|---|
-| `IdCliente` | `int` | `IdCliente` INT PK |
+| `IdCliente` | `int` | `IdCliente` INT PK IDENTITY |
 | `Documento` | `string` | `Documento` VARCHAR(20) UNIQUE |
 | `Nombre` | `string` | `Nombre` VARCHAR(80) |
 | `Telefono` | `string` | `Telefono` VARCHAR(20) |
