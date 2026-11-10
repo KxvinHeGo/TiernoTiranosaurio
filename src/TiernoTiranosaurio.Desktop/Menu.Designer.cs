@@ -43,6 +43,7 @@ namespace TiernoTiranosaurio.Desktop
             lblRol = new ToolStripStatusLabel();
             lblEspacio = new ToolStripStatusLabel();
             lblBaseDatos = new ToolStripStatusLabel();
+            lblAcceso = new ToolStripStatusLabel();
             menuPrincipal.SuspendLayout();
             barraEstado.SuspendLayout();
             SuspendLayout();
@@ -192,7 +193,7 @@ namespace TiernoTiranosaurio.Desktop
             // 
             // barraEstado
             // 
-            barraEstado.Items.AddRange(new ToolStripItem[] { lblUsuario, lblRol, lblEspacio, lblBaseDatos });
+            barraEstado.Items.AddRange(new ToolStripItem[] { lblUsuario, lblRol, lblEspacio, lblAcceso, lblBaseDatos });
             barraEstado.Location = new Point(0, 628);
             barraEstado.Name = "barraEstado";
             barraEstado.Size = new Size(1000, 22);
@@ -221,6 +222,12 @@ namespace TiernoTiranosaurio.Desktop
             lblBaseDatos.Name = "lblBaseDatos";
             lblBaseDatos.Size = new Size(100, 17);
             lblBaseDatos.Text = "Base de datos";
+            // 
+            // lblAcceso
+            // 
+            lblAcceso.Name = "lblAcceso";
+            lblAcceso.Size = new Size(60, 17);
+            lblAcceso.Text = "Acceso";
             // 
             // Menu
             // 
@@ -272,5 +279,6 @@ namespace TiernoTiranosaurio.Desktop
         private ToolStripStatusLabel lblRol;
         private ToolStripStatusLabel lblEspacio;
         private ToolStripStatusLabel lblBaseDatos;
+        private ToolStripStatusLabel lblAcceso;
     }
 }

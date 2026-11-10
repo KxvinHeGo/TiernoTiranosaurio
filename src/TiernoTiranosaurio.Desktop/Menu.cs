@@ -42,11 +42,23 @@ public partial class Menu : Form
             mnuActualizacion.ToolTipText = "Solo disponible para el rol Administrador";
     }
 
+    /// <summary>Muestra en la barra qué plan se está usando (acceso y base de datos).</summary>
     private void VerificarBaseDatos()
     {
+        lblAcceso.Text = "Acceso: " + Sesion.Origen + "   |";
+
         string error = DataBase.ProbarConexion();
-        lblBaseDatos.Text = error == null ? "🟢 Base de datos conectada" : "🔴 Sin conexión a la base de datos";
-        lblBaseDatos.ToolTipText = error ?? "";
+        if (error == null)
+        {
+            string plan = DataBase.Plan == 1 ? "" : "  (plan de respaldo)";
+            lblBaseDatos.Text = "🟢 BD: " + DataBase.Origen + plan;
+            lblBaseDatos.ToolTipText = "";
+        }
+        else
+        {
+            lblBaseDatos.Text = "🔴 Sin conexión a la base de datos";
+            lblBaseDatos.ToolTipText = error;
+        }
     }
 
     /// <summary>

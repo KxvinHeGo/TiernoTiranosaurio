@@ -28,6 +28,7 @@ namespace TiernoTiranosaurio.Desktop
             txtClave = new TextBox();
             btnIngresar = new Button();
             btnSalir = new Button();
+            lblEstado = new Label();
             pnlEncabezado.SuspendLayout();
             SuspendLayout();
             // 
@@ -123,6 +124,15 @@ namespace TiernoTiranosaurio.Desktop
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 
+            // lblEstado
+            // 
+            lblEstado.ForeColor = Color.FromArgb(46, 125, 50);
+            lblEstado.Location = new Point(40, 285);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(300, 30);
+            lblEstado.TabIndex = 7;
+            lblEstado.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Login
             // 
             AcceptButton = btnIngresar;
@@ -130,7 +140,8 @@ namespace TiernoTiranosaurio.Desktop
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             CancelButton = btnSalir;
-            ClientSize = new Size(384, 300);
+            ClientSize = new Size(384, 325);
+            Controls.Add(lblEstado);
             Controls.Add(btnSalir);
             Controls.Add(btnIngresar);
             Controls.Add(txtClave);
@@ -161,5 +172,6 @@ namespace TiernoTiranosaurio.Desktop
         private TextBox txtClave;
         private Button btnIngresar;
         private Button btnSalir;
+        private Label lblEstado;
     }
 }
