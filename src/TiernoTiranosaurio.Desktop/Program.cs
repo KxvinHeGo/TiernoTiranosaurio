@@ -4,6 +4,8 @@ namespace TiernoTiranosaurio.Desktop;
 // - Kevin (Integrante 1): DataBase.cs, Configuracion.cs, Sesion.cs, Login.cs, Menu.cs (MDI)
 // - Arturo (Integrante 2): formularios hijos en la carpeta Formularios/
 //
+// Flujo: Login → Menú MDI → (Cerrar sesión vuelve al Login | Salir cierra la app)
+//
 // IMPORTANTE: para probar un formulario suelto, cambien temporalmente el contenido de Main
 // y DEVUÉLVANLO como está antes de hacer el Pull Request.
 internal static class Program
@@ -13,13 +15,21 @@ internal static class Program
     {
         ApplicationConfiguration.Initialize();
 
-        using (Login login = new Login())
+        while (true)
         {
-            if (login.ShowDialog() != DialogResult.OK)
-                return;   // el usuario dio "Salir"
-        }
+            using (Login login = new Login())
+            {
+                if (login.ShowDialog() != DialogResult.OK)
+                    return;   // el usuario dio "Salir" en el Login
+            }
 
-        // TODO (Kevin): reemplazar por  Application.Run(new Menu());  cuando exista Menu.cs
-        MessageBox.Show("Bienvenido " + Sesion.Usuario + "\nRol: " + Sesion.Rol, "Sesión iniciada");
+            using Menu menu = new Menu();
+            Application.Run(menu);
+
+            if (!menu.CerrarSesionSolicitada)
+                return;       // salió de la aplicación
+
+            Sesion.Cerrar();  // vuelve a mostrar el Login
+        }
     }
 }
