@@ -1,6 +1,6 @@
 # Base de datos
 
-Responsable: **Integrante 1** (único que modifica estos archivos).
+Responsable: **Kevin (Integrante 1)** (único que modifica estos archivos).
 
 Aquí va el script único `BD_TiernoTiranosaurio.sql`, que:
 
@@ -10,4 +10,4 @@ Aquí va el script único `BD_TiernoTiranosaurio.sql`, que:
 4. Crea la vista `vw_MascotasDetalle`.
 5. Termina con `SELECT` de verificación.
 
-**Cómo usarlo:** abrir en SSMS → Ejecutar (F5). Cada vez que el Integrante 1 avise de un cambio, hagan `git pull` y córranlo de nuevo.
+**Cómo usarlo:** abrir en SSMS → Ejecutar (F5). Cada vez que Kevin avise de un cambio, hagan `git pull` y córranlo de nuevo.

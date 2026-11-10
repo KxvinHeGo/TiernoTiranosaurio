@@ -4,9 +4,9 @@
 
 ## Integrante / parte
 
-- [ ] Integrante 1 — BD / API / Login / Menú
-- [ ] Integrante 2 — Formularios de escritorio
-- [ ] Integrante 3 — Web / Identidad visual
+- [ ] Kevin — BD / API / Login / Menú
+- [ ] Arturo — Formularios de escritorio
+- [ ] Juan — Web / Identidad visual
 
 ## Revisión antes de pedir aprobación
 

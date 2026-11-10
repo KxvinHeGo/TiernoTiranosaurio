@@ -6,19 +6,24 @@
 2. Todo entra a `main` por **Pull Request (PR)**, y otro integrante lo revisa antes de aprobarlo.
 3. **Antes de empezar a trabajar**, siempre traer lo último de `main`.
 4. Cada uno toca **solo sus archivos** (ver tabla del README).
-5. El `.sln` y la carpeta `database/` solo los modifica el Integrante 1.
+5. El `.sln` y la carpeta `database/` solo los modifica Kevin.
 6. Mensajes de commit claros: `Agrega formulario de consulta por código`, no `cambios`.
 
 ## Primera vez (cada integrante)
 
 ```bash
-git clone https://github.com/USUARIO/TiernoTiranosaurio.git
+git clone https://github.com/KxvinHeGo/TiernoTiranosaurio.git
 cd TiernoTiranosaurio
-git checkout -b int2-formularios      # cada uno usa SU rama
-git push -u origin int2-formularios
+git checkout arturo      # cada uno usa SU rama: kevin, arturo o juan
 ```
 
-Ramas: `int1-bd-api`, `int2-formularios`, `int3-web`.
+| Integrante | Rama |
+|---|---|
+| 1 — Kevin | `kevin` |
+| 2 — Arturo | `arturo` |
+| 3 — Juan | `juan` |
+
+Las ramas ya existen en GitHub: no hay que crearlas, solo hacer `checkout`.
 
 ## Día a día
 
@@ -26,7 +31,7 @@ Ramas: `int1-bd-api`, `int2-formularios`, `int3-web`.
 # 1. Al empezar: traer lo último de main a mi rama
 git checkout main
 git pull origin main
-git checkout int2-formularios
+git checkout arturo        # su rama
 git merge main
 
 # 2. Trabajar... y guardar avances

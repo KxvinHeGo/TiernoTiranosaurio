@@ -15,30 +15,30 @@ Todo en **.NET 8** con **Visual Studio 2022**.
 
 ```
 TiernoTiranosaurio/
-├── database/                         ← Integrante 1 (ÚNICO que lo modifica)
+├── database/                         ← Kevin (ÚNICO que lo modifica)
 ├── docs/                             ← Diagramas, capturas, guion de la demo
 ├── src/
-│   ├── TiernoTiranosaurio.Api/       ← Integrante 1
-│   ├── TiernoTiranosaurio.Desktop/   ← Integrante 1 (Login, Menu, DataBase) e Integrante 2 (formularios hijos)
-│   └── TiernoTiranosaurio.Web/       ← Integrante 3
+│   ├── TiernoTiranosaurio.Api/       ← Kevin
+│   ├── TiernoTiranosaurio.Desktop/   ← Kevin (Login, Menu, DataBase) y Arturo (formularios hijos)
+│   └── TiernoTiranosaurio.Web/       ← Juan
 ├── .gitignore
 ├── README.md
-└── TiernoTiranosaurio.sln            ← NO modificar (salvo el Integrante 1)
+└── TiernoTiranosaurio.sln            ← NO modificar (salvo Kevin)
 ```
 
 ## 👥 Equipo y responsabilidades
 
 | Integrante | Nombre | Rama | Responsabilidad |
 |---|---|---|---|
-| 1 | _(nombre)_ | `int1-bd-api` | Script de BD, API en Azure, `DataBase.cs`, Login, Menú MDI con roles |
-| 2 | _(nombre)_ | `int2-formularios` | Consulta, Ingresar / Modificar / Retirar mascota, Cotización, Venta |
-| 3 | _(nombre)_ | `int3-web` | Web (Consulta, Maestro-Detalle, Vista), identidad visual, guion de la demo |
+| 1 | Kevin | `kevin` | Script de BD, API en Azure, `DataBase.cs`, Login, Menú MDI con roles |
+| 2 | Arturo | `arturo` | Consulta, Ingresar / Modificar / Retirar mascota, Cotización, Venta |
+| 3 | Juan | `juan` | Web (Consulta, Maestro-Detalle, Vista), identidad visual, guion de la demo |
 
 ---
 
 ## 🤝 Acuerdos de la Fase 0 (contratos)
 
-> Estos nombres son **obligatorios** para todos. Si alguien necesita cambiar algo, se habla primero con el Integrante 1.
+> Estos nombres son **obligatorios** para todos. Si alguien necesita cambiar algo, se habla primero con Kevin.
 
 ### Base de datos: `TiernoTiranosaurio`
 
@@ -72,7 +72,7 @@ Respuesta: 200 OK            { "usuario": "admin", "rol": "Administrador" }
 ```
 
 - Local: `https://localhost:7100/api/auth/login` (Swagger en `https://localhost:7100/swagger`)
-- Azure: _(el Integrante 1 pone aquí la URL cuando publique)_
+- Azure: _(Kevin pone aquí la URL cuando publique)_
 
 ### Cadena de conexión (desarrollo local)
 
@@ -92,6 +92,6 @@ Si su SQL Server tiene otro nombre (por ejemplo `localhost` o `(localdb)\MSSQLLo
 2. Instalar **SQL Server Express** y **SQL Server Management Studio (SSMS)**.
 3. Clonar el repo (ver `docs/GUIA_GIT.md`).
 4. Abrir `TiernoTiranosaurio.sln` en Visual Studio.
-5. Cuando el Integrante 1 suba el script, abrirlo en SSMS y ejecutarlo (F5).
+5. Cuando Kevin suba el script, abrirlo en SSMS y ejecutarlo (F5).
 
 Ver la guía de trabajo con Git en **[docs/GUIA_GIT.md](docs/GUIA_GIT.md)**.
