@@ -7,8 +7,10 @@ using TiernoTiranosaurio.Api.Datos;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuración de cada PC (no se sube a GitHub): permite poner el nombre de SU servidor SQL
-// sin tocar appsettings.json. En Azure la cadena se configura en el portal.
-builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
+// sin tocar appsettings.json. SOLO se usa al correr en local (Development).
+// En Azure la cadena se configura en el portal (App Service → Variables de entorno → Cadenas de conexión).
+if (builder.Environment.IsDevelopment())
+    builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

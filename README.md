@@ -75,7 +75,7 @@ Respuesta: 200 OK            { "usuario": "admin", "rol": "Administrador" }
 ```
 
 - Local: `https://localhost:7100/api/auth/login` (Swagger en `https://localhost:7100/swagger`)
-- Azure: _(Kevin pone aquí la URL cuando publique)_
+- Azure: `https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/api/auth/login` (Swagger en `https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/swagger`)
 
 ### Cadena de conexión (desarrollo local)
 

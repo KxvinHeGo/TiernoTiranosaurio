@@ -15,7 +15,7 @@
 | Entorno | URL |
 |---|---|
 | Local | `https://localhost:7100` (Swagger: `https://localhost:7100/swagger`) |
-| Azure | _(Kevin la pone aquí al publicar)_ |
+| **Azure** ✅ | `https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/` (Swagger: `https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/swagger`) |
 
 ---
 
@@ -142,5 +142,7 @@ Lo usa: **Web → Página de la Vista SQL**. Devuelve las filas de `vw_MascotasD
 
 ## Estado actual
 
-✅ Los 5 endpoints **ya existen con datos falsos** (`Api/Datos/DatosTemporales.cs`), así que **Juan puede empezar hoy**: correr la API en local, abrir Swagger y programar sus páginas.
-⏳ Kevin reemplaza los datos falsos por consultas SQL reales cuando el script de BD esté listo. **El formato de las respuestas no cambia**, así que la Web no tiene que tocar nada.
+✅ Los 5 endpoints consultan la **base de datos real**.
+✅ La API está **publicada en Azure** (Brazil South) y conectada a la **Azure SQL Database** `TiernoTiranosaurio`.
+👉 Juan: la Web puede apuntar directo a `https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/` (no necesita correr la API en su PC).
+ℹ️ La BD de Azure es gratuita y se "duerme" si no se usa: la primera petición puede tardar ~1 minuto o fallar una vez. Reintentar.
