@@ -1,0 +1,48 @@
+# ===== Visual Studio / .NET =====
+.vs/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.cache
+*.pdb
+*.tmp
+*.log
+TestResults/
+packages/
+*.nupkg
+project.lock.json
+artifacts/
+
+# ===== Publicación a Azure (contienen credenciales) =====
+*.pubxml
+*.pubxml.user
+*.publishproj
+*.azurePubxml
+PublishProfiles/
+PublishScripts/
+
+# ===== Configuración local con secretos (NO subir contraseñas) =====
+appsettings.Local.json
+appsettings.*.Local.json
+secrets.json
+*.env
+
+# ===== Sistema operativo =====
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ===== Editores =====
+.vscode/
+.idea/
+*.swp
