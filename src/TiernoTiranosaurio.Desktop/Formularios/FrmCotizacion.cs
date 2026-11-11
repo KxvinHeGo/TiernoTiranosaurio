@@ -32,7 +32,7 @@ public class FrmCotizacion : Form
         txtConcepto = new TextBox { Location = new Point(100, 50), Width = 260 };
         nudCantidad = new NumericUpDown { Location = new Point(100, 85), Width = 70, Minimum = 1, Maximum = 100, Value = 1 };
         txtPrecio = new TextBox { Location = new Point(265, 85), Width = 95 };
-        Button btnAgregar = Ui.Boton("Agregar", 375, 83, (s, e) => Agregar(), 95);
+        Button btnAgregar = Ui.Principal(Ui.Boton("Agregar", 375, 83, (s, e) => Agregar(), 95));
 
         dgv = Ui.Grilla(15, 125, 690, 215);
         dgv.DataSource = items;
@@ -64,8 +64,10 @@ public class FrmCotizacion : Form
         lblIva = Total("IVA:", 411);
         lblTotal = Total("TOTAL:", 445);
         lblTotal.Font = new Font(Font.FontFamily, 12, FontStyle.Bold);
+        lblTotal.ForeColor = Ui.Verde;
 
         AcceptButton = btnAgregar;
+        Ui.Encabezado(this, "Cotización");
         Load += (s, e) =>
         {
             dgv.Columns["PrecioUnitario"].HeaderText = "Precio unitario";

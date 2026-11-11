@@ -21,7 +21,7 @@ public class FrmVenta : Form
         cboMascota.SelectedIndexChanged += (s, e) => MostrarPrecio();
         lblPrecio = new Label { Location = new Point(90, 85), Size = new Size(220, 24),
             Font = new Font(Font.FontFamily, 11, FontStyle.Bold) };
-        Button btnVender = Ui.Boton("Registrar venta", 410, 48, (s, e) => Vender(), 140);
+        Button btnVender = Ui.Principal(Ui.Boton("Registrar venta", 410, 48, (s, e) => Vender(), 140));
         dgvVendidas = Ui.Grilla(15, 150, 650, 275);
 
         Controls.AddRange(new Control[]
@@ -35,6 +35,7 @@ public class FrmVenta : Form
         });
 
         AcceptButton = btnVender;
+        Ui.Encabezado(this, "Venta de mascotas");
         Load += (s, e) => Ui.Seguro(CargarTodo);
     }
 

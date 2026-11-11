@@ -24,7 +24,7 @@ public class FrmIngresarMascota : Form
         nudEdad = new NumericUpDown { Location = new Point(110, 120), Width = 80, Minimum = 0, Maximum = 300 };
         txtPrecio = new TextBox { Location = new Point(110, 155), Width = 140 };
 
-        Button btnGuardar = Ui.Boton("Guardar", 110, 200, (s, e) => Guardar());
+        Button btnGuardar = Ui.Principal(Ui.Boton("Guardar", 110, 200, (s, e) => Guardar()));
 
         Controls.AddRange(new Control[]
         {
@@ -38,6 +38,7 @@ public class FrmIngresarMascota : Form
         });
 
         AcceptButton = btnGuardar;
+        Ui.Encabezado(this, "Ingresar mascota");
         Load += (s, e) => Ui.Seguro(() => AccesoDatos.CargarTipos(cboTipo));
     }
 
