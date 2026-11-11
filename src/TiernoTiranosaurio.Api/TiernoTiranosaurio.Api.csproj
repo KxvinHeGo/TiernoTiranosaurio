@@ -15,4 +15,9 @@
     <ProjectReference Include="..\TiernoTiranosaurio.Modelo\TiernoTiranosaurio.Modelo.csproj" />
   </ItemGroup>
 
+  <!-- Los archivos de configuración local NO se publican en Azure -->
+  <ItemGroup>
+    <Content Update="appsettings.Local*.json" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
 </Project>

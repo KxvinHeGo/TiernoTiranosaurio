@@ -23,15 +23,16 @@ public class FrmConsulta : Form
         Controls.AddRange(new Control[]
         {
             Ui.Etiqueta("Código:", 15, 15), txtCodigo,
-            Ui.Boton("Buscar por código", 190, 13, (s, e) => BuscarPorCodigo(), 150),
+            Ui.Principal(Ui.Boton("Buscar por código", 190, 13, (s, e) => BuscarPorCodigo(), 150)),
             Ui.Etiqueta("Nombre:", 15, 50), txtNombre,
-            Ui.Boton("Buscar por nombre", 310, 48, (s, e) => BuscarPorNombre(), 150),
+            Ui.Principal(Ui.Boton("Buscar por nombre", 310, 48, (s, e) => BuscarPorNombre(), 150)),
             Ui.Boton("Ver todas", 470, 48, (s, e) => VerTodas()),
             dgv
         });
 
         txtCodigo.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; BuscarPorCodigo(); } };
         txtNombre.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; BuscarPorNombre(); } };
+        Ui.Encabezado(this, "Consulta de mascotas");
         Load += (s, e) => VerTodas();
     }
 

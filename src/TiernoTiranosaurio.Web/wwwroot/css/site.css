@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-    --color-primario: #2A9D8F;
-    --color-primario-hover: #21867a;
-    --color-secundario: #264653;
-    --color-acento: #E9C46A;
-    --color-coral: #E76F51;
-    --color-fondo: #F4F7F6;
+    --color-primario: #2E7D32;
+    --color-primario-hover: #1B5E20;
+    --color-secundario: #1B5E20;
+    --color-acento: #66BB6A;
+    --color-coral: #C62828;
+    --color-fondo: #E8F5E9;
     --color-blanco: #FFFFFF;
-    --color-texto: #2B2D42;
-    --color-gris: #6C757D;
-    --color-borde: #DEE2E6;
-    --sombra-suave: 0 4px 16px rgba(38, 70, 83, 0.08);
+    --color-texto: #1E2923;
+    --color-gris: #546E7A;
+    --color-borde: #C8E6C9;
+    --sombra-suave: 0 4px 16px rgba(27, 94, 32, 0.08);
     --radio: 12px;
 }
 

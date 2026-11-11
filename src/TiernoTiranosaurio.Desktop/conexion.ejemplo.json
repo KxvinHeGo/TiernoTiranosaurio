@@ -1,7 +1,12 @@
 {
-  "_instrucciones": "Copien este archivo como conexion.json (misma carpeta) y cambien el Server por el de su SQL Server. conexion.json NO se sube a GitHub.",
-  "_ejemplos_server": "localhost  |  localhost\\SQLEXPRESS  |  (localdb)\\MSSQLLocalDB  |  NOMBRE-PC\\SQLEXPRESS",
-  "CadenaConexion": "Server=localhost\\SQLEXPRESS;Database=TiernoTiranosaurio;Trusted_Connection=True;TrustServerCertificate=True;",
-  "_ejemplos_url": "Local: https://localhost:7100/   |   Azure: https://NOMBRE-DE-LA-API.azurewebsites.net/",
-  "UrlApi": "https://localhost:7100/"
+  "_instrucciones": "Copien este archivo como conexion.json (misma carpeta). conexion.json NO se sube a GitHub. Las listas van en orden de preferencia: si el primero falla, la app prueba el siguiente sola.",
+  "_ejemplos_server": "localhost  |  localhost\\SQLEXPRESS  |  (localdb)\\MSSQLLocalDB",
+  "UrlsApi": [
+    "https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/",
+    "https://localhost:7100/"
+  ],
+  "CadenasConexion": [
+    "Server=localhost\\SQLEXPRESS;Database=TiernoTiranosaurio;Trusted_Connection=True;TrustServerCertificate=True;Connect Timeout=5;"
+  ],
+  "_plan_b_bd": "Opcional: agreguen como SEGUNDO elemento de CadenasConexion la cadena de Azure SQL (pídansela a Kevin por el chat, NUNCA en GitHub)."
 }

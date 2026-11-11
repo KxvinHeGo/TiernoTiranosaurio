@@ -21,44 +21,47 @@ public class FrmIngresarMascota : Form
         txtNombre = new TextBox { Location = new Point(110, 15), Width = 220, MaxLength = 50 };
         cboTipo = new ComboBox { Location = new Point(110, 50), Width = 220, DropDownStyle = ComboBoxStyle.DropDownList };
         txtRaza = new TextBox { Location = new Point(110, 85), Width = 220, MaxLength = 50 };
-        nudEdad = new NumericUpDown { Location = new Point(110, 120), Width = 80, Minimum = 0, Maximum = 50 };
+        nudEdad = new NumericUpDown { Location = new Point(110, 120), Width = 80, Minimum = 0, Maximum = 300 };
         txtPrecio = new TextBox { Location = new Point(110, 155), Width = 140 };
 
-        Button btnGuardar = Ui.Boton("Guardar", 110, 200, (s, e) => Guardar());
+        Button btnGuardar = Ui.Principal(Ui.Boton("Guardar", 110, 200, (s, e) => Guardar()));
 
         Controls.AddRange(new Control[]
         {
             Ui.Etiqueta("Nombre:", 15, 15), txtNombre,
             Ui.Etiqueta("Tipo:", 15, 50), cboTipo,
             Ui.Etiqueta("Raza:", 15, 85), txtRaza,
-            Ui.Etiqueta("Edad (años):", 15, 120), nudEdad,
+            Ui.Etiqueta("Edad (meses):", 15, 120), nudEdad,
             Ui.Etiqueta("Precio:", 15, 155), txtPrecio,
             btnGuardar,
             Ui.Boton("Limpiar", 225, 200, (s, e) => Limpiar(), 105)
         });
 
         AcceptButton = btnGuardar;
+        Ui.Encabezado(this, "Ingresar mascota");
         Load += (s, e) => Ui.Seguro(() => AccesoDatos.CargarTipos(cboTipo));
     }
 
     private void Guardar()
     {
         if (txtNombre.Text.Trim() == "") { Ui.Aviso("El nombre es obligatorio.", txtNombre); return; }
+        if (txtRaza.Text.Trim() == "") { Ui.Aviso("La raza es obligatoria.", txtRaza); return; }
         if (cboTipo.SelectedValue == null) { Ui.Aviso("Selecciona el tipo de mascota.", cboTipo); return; }
         if (!Ui.LeerPrecio(txtPrecio, out decimal precio)) return;
 
         Ui.Seguro(() =>
         {
-            AccesoDatos.Ejecutar(
+            object codigo = AccesoDatos.EjecutarEscalar(
                 @"INSERT INTO Mascota (Nombre, IdTipo, Raza, Edad, Precio, Estado)
-                  VALUES (@nombre, @idTipo, @raza, @edad, @precio, 'Disponible')",
+                  VALUES (@nombre, @idTipo, @raza, @edad, @precio, 'Disponible');
+                  SELECT CAST(SCOPE_IDENTITY() AS INT);",
                 new SqlParameter("@nombre", SqlDbType.NVarChar, 50) { Value = txtNombre.Text.Trim() },
                 new SqlParameter("@idTipo", SqlDbType.Int) { Value = Convert.ToInt32(cboTipo.SelectedValue) },
                 new SqlParameter("@raza", SqlDbType.NVarChar, 50) { Value = txtRaza.Text.Trim() },
                 new SqlParameter("@edad", SqlDbType.Int) { Value = (int)nudEdad.Value },
                 new SqlParameter("@precio", SqlDbType.Decimal) { Value = precio, Precision = 12, Scale = 2 });
 
-            Ui.Info("Mascota " + txtNombre.Text.Trim() + " ingresada.");
+            Ui.Info("Mascota " + txtNombre.Text.Trim() + " ingresada con el código " + codigo + ".");
             Limpiar();
         });
     }

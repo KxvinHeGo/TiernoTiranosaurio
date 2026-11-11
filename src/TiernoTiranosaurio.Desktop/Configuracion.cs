@@ -4,8 +4,11 @@ namespace TiernoTiranosaurio.Desktop;
 
 /// <summary>
 /// Lee la configuración de cada PC desde conexion.json (no se sube a GitHub).
-///   - CadenaConexion → conexión manual a SQL Server (la usa DataBase.cs)
-///   - UrlApi         → dirección de la API de login (local o Azure)
+///
+///   "UrlsApi":         lista de APIs de login, en orden de preferencia (Plan A, Plan B...)
+///   "CadenasConexion": lista de bases de datos, en orden de preferencia (Plan A, Plan B...)
+///
+/// También acepta el formato viejo con un solo valor: "UrlApi" y "CadenaConexion".
 /// Para crearlo: copiar conexion.ejemplo.json → conexion.json y ajustar los valores.
 /// </summary>
 public static class Configuracion
@@ -15,31 +18,44 @@ public static class Configuracion
 
     private static readonly Lazy<JsonElement> raiz = new(Leer);
 
-    public static string CadenaConexion
+    /// <summary>Bases de datos en orden de preferencia.</summary>
+    public static string[] CadenasConexion
     {
         get
         {
-            string valor = Texto("CadenaConexion");
-            if (string.IsNullOrWhiteSpace(valor))
-                throw new InvalidOperationException("Falta CadenaConexion en " + Archivo + ".");
-            return valor;
+            string[] lista = Lista("CadenasConexion", "CadenaConexion");
+            if (lista.Length == 0)
+                throw new InvalidOperationException("Falta CadenasConexion en " + Archivo + ".");
+            return lista;
         }
     }
 
-    /// <summary>Dirección base de la API, siempre terminada en "/".</summary>
-    public static string UrlApi
+    /// <summary>APIs de login en orden de preferencia, cada una terminada en "/".</summary>
+    public static string[] UrlsApi
     {
         get
         {
-            string valor = Texto("UrlApi");
-            if (string.IsNullOrWhiteSpace(valor)) valor = UrlApiPorDefecto;
-            return valor.EndsWith('/') ? valor : valor + "/";
+            string[] lista = Lista("UrlsApi", "UrlApi");
+            if (lista.Length == 0) lista = new[] { UrlApiPorDefecto };
+            return lista.Select(u => u.EndsWith('/') ? u : u + "/").ToArray();
         }
     }
 
-    private static string Texto(string propiedad)
+    /// <summary>Lee una lista (formato nuevo) o un solo valor (formato viejo).</summary>
+    private static string[] Lista(string propiedadLista, string propiedadUnica)
     {
-        return raiz.Value.TryGetProperty(propiedad, out JsonElement v) ? v.GetString() : null;
+        JsonElement r = raiz.Value;
+
+        if (r.TryGetProperty(propiedadLista, out JsonElement arr) && arr.ValueKind == JsonValueKind.Array)
+            return arr.EnumerateArray()
+                      .Select(e => e.GetString())
+                      .Where(s => !string.IsNullOrWhiteSpace(s))
+                      .ToArray();
+
+        if (r.TryGetProperty(propiedadUnica, out JsonElement v) && !string.IsNullOrWhiteSpace(v.GetString()))
+            return new[] { v.GetString() };
+
+        return Array.Empty<string>();
     }
 
     private static JsonElement Leer()
