@@ -95,17 +95,6 @@ public partial class Menu : Form
     private void mnuCotizacion_Click(object sender, EventArgs e) => Abrir<FrmCotizacion>();
     private void mnuVenta_Click(object sender, EventArgs e) => Abrir<FrmVenta>();
 
-    // ---------- Ventanas ----------
-    private void mnuCascada_Click(object sender, EventArgs e) => LayoutMdi(MdiLayout.Cascade);
-    private void mnuMosaicoH_Click(object sender, EventArgs e) => LayoutMdi(MdiLayout.TileHorizontal);
-    private void mnuMosaicoV_Click(object sender, EventArgs e) => LayoutMdi(MdiLayout.TileVertical);
-
-    private void mnuCerrarVentanas_Click(object sender, EventArgs e)
-    {
-        foreach (Form hijo in MdiChildren)
-            hijo.Close();
-    }
-
     // ---------- Salir ----------
     private void mnuCerrarSesion_Click(object sender, EventArgs e)
     {
