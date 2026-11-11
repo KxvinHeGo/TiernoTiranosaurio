@@ -29,12 +29,6 @@ namespace TiernoTiranosaurio.Desktop
             mnuNovedades = new ToolStripMenuItem();
             mnuCotizacion = new ToolStripMenuItem();
             mnuVenta = new ToolStripMenuItem();
-            mnuVentanas = new ToolStripMenuItem();
-            mnuCascada = new ToolStripMenuItem();
-            mnuMosaicoH = new ToolStripMenuItem();
-            mnuMosaicoV = new ToolStripMenuItem();
-            mnuSeparadorVentanas = new ToolStripSeparator();
-            mnuCerrarVentanas = new ToolStripMenuItem();
             mnuSalirMenu = new ToolStripMenuItem();
             mnuCerrarSesion = new ToolStripMenuItem();
             mnuSalir = new ToolStripMenuItem();
@@ -52,9 +46,8 @@ namespace TiernoTiranosaurio.Desktop
             // 
             menuPrincipal.BackColor = Color.FromArgb(46, 125, 50);
             menuPrincipal.Font = new Font("Segoe UI", 10F);
-            menuPrincipal.Items.AddRange(new ToolStripItem[] { mnuConsulta, mnuActualizacion, mnuNovedades, mnuVentanas, mnuSalirMenu });
+            menuPrincipal.Items.AddRange(new ToolStripItem[] { mnuConsulta, mnuActualizacion, mnuNovedades, mnuSalirMenu });
             menuPrincipal.Location = new Point(0, 0);
-            menuPrincipal.MdiWindowListItem = mnuVentanas;
             menuPrincipal.Name = "menuPrincipal";
             menuPrincipal.Padding = new Padding(8, 4, 0, 4);
             menuPrincipal.Size = new Size(1000, 31);
@@ -126,47 +119,6 @@ namespace TiernoTiranosaurio.Desktop
             mnuVenta.Size = new Size(200, 24);
             mnuVenta.Text = "Venta de mascota";
             mnuVenta.Click += mnuVenta_Click;
-            // 
-            // mnuVentanas
-            // 
-            mnuVentanas.DropDownItems.AddRange(new ToolStripItem[] { mnuCascada, mnuMosaicoH, mnuMosaicoV, mnuSeparadorVentanas, mnuCerrarVentanas });
-            mnuVentanas.ForeColor = Color.White;
-            mnuVentanas.Name = "mnuVentanas";
-            mnuVentanas.Size = new Size(77, 23);
-            mnuVentanas.Text = "&Ventanas";
-            // 
-            // mnuCascada
-            // 
-            mnuCascada.Name = "mnuCascada";
-            mnuCascada.Size = new Size(220, 24);
-            mnuCascada.Text = "Cascada";
-            mnuCascada.Click += mnuCascada_Click;
-            // 
-            // mnuMosaicoH
-            // 
-            mnuMosaicoH.Name = "mnuMosaicoH";
-            mnuMosaicoH.Size = new Size(220, 24);
-            mnuMosaicoH.Text = "Mosaico horizontal";
-            mnuMosaicoH.Click += mnuMosaicoH_Click;
-            // 
-            // mnuMosaicoV
-            // 
-            mnuMosaicoV.Name = "mnuMosaicoV";
-            mnuMosaicoV.Size = new Size(220, 24);
-            mnuMosaicoV.Text = "Mosaico vertical";
-            mnuMosaicoV.Click += mnuMosaicoV_Click;
-            // 
-            // mnuSeparadorVentanas
-            // 
-            mnuSeparadorVentanas.Name = "mnuSeparadorVentanas";
-            mnuSeparadorVentanas.Size = new Size(217, 6);
-            // 
-            // mnuCerrarVentanas
-            // 
-            mnuCerrarVentanas.Name = "mnuCerrarVentanas";
-            mnuCerrarVentanas.Size = new Size(220, 24);
-            mnuCerrarVentanas.Text = "Cerrar todas";
-            mnuCerrarVentanas.Click += mnuCerrarVentanas_Click;
             // 
             // mnuSalirMenu
             // 
@@ -265,12 +217,6 @@ namespace TiernoTiranosaurio.Desktop
         private ToolStripMenuItem mnuNovedades;
         private ToolStripMenuItem mnuCotizacion;
         private ToolStripMenuItem mnuVenta;
-        private ToolStripMenuItem mnuVentanas;
-        private ToolStripMenuItem mnuCascada;
-        private ToolStripMenuItem mnuMosaicoH;
-        private ToolStripMenuItem mnuMosaicoV;
-        private ToolStripSeparator mnuSeparadorVentanas;
-        private ToolStripMenuItem mnuCerrarVentanas;
         private ToolStripMenuItem mnuSalirMenu;
         private ToolStripMenuItem mnuCerrarSesion;
         private ToolStripMenuItem mnuSalir;
