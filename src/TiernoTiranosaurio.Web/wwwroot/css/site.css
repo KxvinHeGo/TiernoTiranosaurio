@@ -1,5 +1,415 @@
-/* TODO (Integrante 3): identidad visual de El Tierno Tiranosaurio (colores, tipografía, logo) */
-body { font-family: Segoe UI, Arial, sans-serif; margin: 0; }
-header { padding: 1rem 2rem; }
-main { padding: 1rem 2rem; }
-nav a { margin-right: 1rem; }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --color-primario: #2A9D8F;
+    --color-primario-hover: #21867a;
+    --color-secundario: #264653;
+    --color-acento: #E9C46A;
+    --color-coral: #E76F51;
+    --color-fondo: #F4F7F6;
+    --color-blanco: #FFFFFF;
+    --color-texto: #2B2D42;
+    --color-gris: #6C757D;
+    --color-borde: #DEE2E6;
+    --sombra-suave: 0 4px 16px rgba(38, 70, 83, 0.08);
+    --radio: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Cabecera y Navegación */
+.topbar {
+    background: linear-gradient(135deg, var(--color-secundario) 0%, #1d3540 100%);
+    color: var(--color-blanco);
+    padding: 0.85rem 2rem;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    color: var(--color-blanco);
+}
+
+.brand img {
+    width: 44px;
+    height: 44px;
+    transition: transform 0.2s ease;
+}
+
+.brand:hover img {
+    transform: rotate(-8deg) scale(1.06);
+}
+
+.brand-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.brand-subtitle {
+    font-size: 0.78rem;
+    color: var(--color-acento);
+    display: block;
+    font-weight: 500;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: var(--color-blanco);
+}
+
+.nav-link.active {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    font-weight: 600;
+}
+
+/* Contenedor Principal */
+.main-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+}
+
+/* Encabezado de Página */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 1.65rem;
+    color: var(--color-secundario);
+}
+
+.page-subtitle {
+    margin: 0.25rem 0 0;
+    color: var(--color-gris);
+    font-size: 0.95rem;
+}
+
+/* Tarjetas y Paneles */
+.card {
+    background: var(--color-blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-suave);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Estadísticas Inicio */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--color-blanco);
+    border-radius: var(--radio);
+    padding: 1.35rem 1.5rem;
+    box-shadow: var(--sombra-suave);
+    border-left: 5px solid var(--color-primario);
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-card.acento { border-left-color: var(--color-acento); }
+.stat-card.coral { border-left-color: var(--color-coral); }
+.stat-card.secundario { border-left-color: var(--color-secundario); }
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--color-gris);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-secundario);
+    margin-top: 0.25rem;
+}
+
+/* Formularios y Buscadores */
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    align-items: end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+}
+
+.input-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid var(--color-borde);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primario);
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-primario {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.btn-primario:hover {
+    background-color: var(--color-primario-hover);
+}
+
+.btn-secundario {
+    background-color: var(--color-secundario);
+    color: var(--color-blanco);
+}
+
+.btn-secundario:hover {
+    background-color: #1b333d;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1.5px solid var(--color-borde);
+    color: var(--color-texto);
+}
+
+.btn-outline:hover {
+    border-color: var(--color-secundario);
+    background-color: #f1f3f5;
+}
+
+/* Maestro-Detalle: Selector de Tipos */
+.tipos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.85rem;
+    margin-top: 0.75rem;
+}
+
+.tipo-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    background: var(--color-fondo);
+    border: 2px solid transparent;
+    text-decoration: none;
+    color: var(--color-secundario);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tipo-pill:hover {
+    border-color: var(--color-primario);
+    transform: translateY(-2px);
+}
+
+.tipo-pill.activo {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+    box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
+}
+
+.tipo-emoji {
+    font-size: 1.75rem;
+    margin-bottom: 0.3rem;
+}
+
+/* Tablas */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.94rem;
+}
+
+.tabla thead th {
+    background-color: var(--color-secundario);
+    color: var(--color-blanco);
+    text-align: left;
+    padding: 0.85rem 1rem;
+    font-weight: 600;
+}
+
+.tabla thead th:first-child { border-top-left-radius: 8px; }
+.tabla thead th:last-child { border-top-right-radius: 8px; }
+
+.tabla tbody tr {
+    border-bottom: 1px solid var(--color-borde);
+    transition: background-color 0.15s;
+}
+
+.tabla tbody tr:hover {
+    background-color: rgba(42, 157, 143, 0.05);
+}
+
+.tabla td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+}
+
+.codigo-tag {
+    font-family: Consolas, monospace;
+    font-weight: 700;
+    color: var(--color-secundario);
+    background: #e9ecef;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+}
+
+.precio-col {
+    font-weight: 600;
+    color: var(--color-secundario);
+}
+
+/* Badges de Estado */
+.badge {
+    display: inline-block;
+    padding: 0.28rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-disponible {
+    background-color: rgba(42, 157, 143, 0.15);
+    color: #1b7468;
+}
+
+.badge-vendida {
+    background-color: rgba(231, 111, 81, 0.16);
+    color: #c84b2c;
+}
+
+/* Alertas */
+.alerta {
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.alerta-error {
+    background-color: #ffe3e3;
+    color: #c92a2a;
+    border-left: 4px solid #c92a2a;
+}
+
+.alerta-vacio {
+    background-color: #fff3bf;
+    color: #856404;
+    border-left: 4px solid var(--color-acento);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--color-blanco);
+    border-top: 1px solid var(--color-borde);
+    text-align: center;
+    padding: 1.1rem;
+    font-size: 0.85rem;
+    color: var(--color-gris);
+}
