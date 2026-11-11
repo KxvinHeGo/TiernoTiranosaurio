@@ -1,21 +1,48 @@
+@{
+    string rutaActual = ViewContext.RouteData.Values["page"]?.ToString() ?? "";
+}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - El Tierno Tiranosaurio</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <h1>El Tierno Tiranosaurio</h1>
-        <nav>
-            <a asp-page="/Index">Inicio</a>
-            @* TODO (Integrante 3): enlaces a Consulta, MaestroDetalle y Vista *@
-        </nav>
+    <header class="topbar">
+        <div class="topbar-container">
+            <a asp-page="/Index" class="brand">
+                <img src="~/img/logo.svg" alt="Logo El Tierno Tiranosaurio" />
+                <div>
+                    <h1 class="brand-title">El Tierno Tiranosaurio</h1>
+                    <span class="brand-subtitle">Tienda de Mascotas · Portal Web</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a asp-page="/Index" class="nav-link @(rutaActual == "/Index" ? "active" : "")">
+                    <i class="fa-solid fa-house"></i> Inicio
+                </a>
+                <a asp-page="/Consulta" class="nav-link @(rutaActual == "/Consulta" ? "active" : "")">
+                    <i class="fa-solid fa-magnifying-glass"></i> Consulta
+                </a>
+                <a asp-page="/MaestroDetalle" class="nav-link @(rutaActual == "/MaestroDetalle" ? "active" : "")">
+                    <i class="fa-solid fa-layer-group"></i> Maestro-Detalle
+                </a>
+                <a asp-page="/Vista" class="nav-link @(rutaActual == "/Vista" ? "active" : "")">
+                    <i class="fa-solid fa-table-list"></i> Vista General
+                </a>
+            </nav>
+        </div>
     </header>
-    <main>
+
+    <main class="main-container">
         @RenderBody()
     </main>
+
+    <footer class="footer">
+        <strong>🦖 El Tierno Tiranosaurio</strong> — Semana de Ingeniería (.NET 8 + API REST + SQL Server)
+    </footer>
 </body>
 </html>

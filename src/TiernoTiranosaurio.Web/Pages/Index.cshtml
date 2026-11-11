@@ -1,6 +1,65 @@
 @page
+@model IndexModel
 @{
     ViewData["Title"] = "Inicio";
 }
-<h2>Bienvenido a la tienda de mascotas El Tierno Tiranosaurio</h2>
-<p>Proyecto en construcción.</p>
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">🦖 Bienvenido a El Tierno Tiranosaurio</h2>
+        <p class="page-subtitle">Sistema Web conectado en tiempo real a nuestra API REST y SQL Server</p>
+    </div>
+    <a asp-page="/Vista" class="btn btn-primario"> Ver Vista General</a>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.ErrorApi))
+{
+    <div class="alerta alerta-error">
+         @Model.ErrorApi
+    </div>
+}
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-label">Total Mascotas</span>
+        <span class="stat-value">@Model.TotalMascotas</span>
+    </div>
+    <div class="stat-card acento">
+        <span class="stat-label">Disponibles</span>
+        <span class="stat-value">@Model.Disponibles</span>
+    </div>
+    <div class="stat-card coral">
+        <span class="stat-label">Vendidas</span>
+        <span class="stat-value">@Model.Vendidas</span>
+    </div>
+    <div class="stat-card secundario">
+        <span class="stat-label">Tipos de Mascota</span>
+        <span class="stat-value">@Model.TotalTipos</span>
+    </div>
+</div>
+
+<div class="search-grid">
+    <div class="card">
+        <h3 style="margin-top:0; color: var(--color-secundario);"> 1. Consulta de Mascotas</h3>
+        <p style="color: var(--color-gris); font-size: 0.93rem;">
+            Busca mascotas por su <strong>código exacto</strong> (101 al 120) o filtra por coincidencias en su <strong>nombre</strong>.
+        </p>
+        <a asp-page="/Consulta" class="btn btn-primario">Ir a Consulta →</a>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0; color: var(--color-secundario);"> 2. Maestro-Detalle</h3>
+        <p style="color: var(--color-gris); font-size: 0.93rem;">
+            Selecciona un <strong>Tipo de Mascota</strong> (Perro, Gato, Ave, Pez, Roedor, Reptil) y explora las mascotas asociadas.
+        </p>
+        <a asp-page="/MaestroDetalle" class="btn btn-primario">Ir a Maestro-Detalle →</a>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0; color: var(--color-secundario);"> 3. Vista SQL (vw_MascotasDetalle)</h3>
+        <p style="color: var(--color-gris); font-size: 0.93rem;">
+            Visualiza el cruce completo entre <strong>Mascota</strong>, <strong>TipoMascota</strong> y el <strong>Cliente</strong> comprador.
+        </p>
+        <a asp-page="/Vista" class="btn btn-primario">Ir a la Vista →</a>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+@page
+@model ConsultaModel
+@{
+    ViewData["Title"] = "Consulta de Mascotas";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">🔍 Consulta de Mascotas</h2>
+        <p class="page-subtitle">Búsqueda por código exacto (<code>GET api/mascotas/{codigo}</code>) o por nombre (<code>GET api/mascotas?nombre=...</code>)</p>
+    </div>
+    <a asp-page="/Consulta" class="btn btn-outline">🔄 Mostrar todas</a>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.ErrorApi))
+{
+    <div class="alerta alerta-error">⚠️ @Model.ErrorApi</div>
+}
+
+<div class="card">
+    <div class="search-grid">
+        <form method="get" class="form-group">
+            <label for="codigo">Buscar por Código Exacto (101 - 120)</label>
+            <div class="input-row">
+                <input type="number" id="codigo" name="Codigo" value="@Model.Codigo" min="1" placeholder="Ej: 101" />
+                <button type="submit" class="btn btn-secundario">Buscar Código</button>
+            </div>
+        </form>
+
+        <form method="get" class="form-group">
+            <label for="nombre">Buscar por Nombre de la Mascota</label>
+            <div class="input-row">
+                <input type="text" id="nombre" name="Nombre" value="@Model.Nombre" placeholder="Ej: Rex, Luna, Thor..." />
+                <button type="submit" class="btn btn-primario">Buscar Nombre</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="margin:0; font-size:1.15rem; color:var(--color-secundario);">
+            Resultados encontrados: <strong>@Model.Mascotas.Count</strong>
+        </h3>
+    </div>
+
+    @if (Model.Mascotas.Count == 0)
+    {
+        <div class="alerta alerta-vacio">
+            No se encontraron mascotas con los criterios ingresados.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Raza</th>
+                        <th>Edad (meses)</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model.Mascotas)
+                    {
+                        bool disponible = m.Estado == EstadosMascota.Disponible;
+                        <tr>
+                            <td><span class="codigo-tag">#@m.Codigo</span></td>
+                            <td><strong>@m.Nombre</strong></td>
+                            <td>@Model.ObtenerNombreTipo(m.IdTipo)</td>
+                            <td>@m.Raza</td>
+                            <td>@m.Edad meses</td>
+                            <td class="precio-col">@m.Precio.ToString("C0", ConsultaModel.Pesos)</td>
+                            <td>
+                                <span class="badge @(disponible ? "badge-disponible" : "badge-vendida")">
+                                    @(disponible ? "Disponible" : "Vendida")
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

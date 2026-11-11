@@ -1,0 +1,122 @@
+@page
+@model VistaModel
+@{
+    ViewData["Title"] = "Vista General (vw_MascotasDetalle)";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title"><i class="fa-solid fa-table-list"></i> Vista General: <code>vw_MascotasDetalle</code></h2>
+        <p class="page-subtitle">Cruce en SQL Server entre <strong>Mascota</strong>, <strong>TipoMascota</strong> y <strong>Cliente</strong> (<code>GET api/vistamascotas</code>)</p>
+    </div>
+    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <a asp-page="/Vista" class="btn @(string.IsNullOrEmpty(Model.EstadoFiltro) ? "btn-secundario" : "btn-outline")">Todas</a>
+        <a asp-page="/Vista" asp-route-EstadoFiltro="Disponible" asp-route-Buscar="@Model.Buscar" asp-route-Orden="@Model.Orden" class="btn @(Model.EstadoFiltro == "Disponible" ? "btn-primario" : "btn-outline")">Disponibles (@Model.CantidadDisponibles)</a>
+        <a asp-page="/Vista" asp-route-EstadoFiltro="Vendida" asp-route-Buscar="@Model.Buscar" asp-route-Orden="@Model.Orden" class="btn @(Model.EstadoFiltro == "Vendida" ? "btn-primario" : "btn-outline")">Vendidas (@Model.CantidadVendidas)</a>
+        <a asp-page="/Vista" asp-route-EstadoFiltro="@Model.EstadoFiltro" asp-route-Buscar="@Model.Buscar" asp-route-Orden="@Model.Orden" class="btn btn-primario">
+            <i class="fa-solid fa-rotate"></i> Actualizar en vivo
+        </a>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.ErrorApi))
+{
+    <div class="alerta alerta-error"><i class="fa-solid fa-triangle-exclamation"></i> @Model.ErrorApi</div>
+}
+
+<!-- Extra 1: Resumen Financiero de la Tienda -->
+<div class="stats-grid">
+    <div class="stat-card coral">
+        <span class="stat-label"><i class="fa-solid fa-sack-dollar"></i> Total Recaudado (Ventas)</span>
+        <span class="stat-value">@Model.TotalRecaudadoVentas.ToString("C0", VistaModel.Pesos)</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label"><i class="fa-solid fa-boxes-stacked"></i> Valor Inventario Disponible</span>
+        <span class="stat-value">@Model.ValorInventarioDisponible.ToString("C0", VistaModel.Pesos)</span>
+    </div>
+    <div class="stat-card acento">
+        <span class="stat-label"><i class="fa-solid fa-paw"></i> Mascotas Mostradas</span>
+        <span class="stat-value">@Model.Filas.Count</span>
+    </div>
+</div>
+
+<!-- Extra 2: Buscador por Cliente / Raza / Mascota y Ordenamiento -->
+<div class="card">
+    <form method="get" class="search-grid">
+        <input type="hidden" name="EstadoFiltro" value="@Model.EstadoFiltro" />
+
+        <div class="form-group">
+            <label for="buscar">Filtrar por Cliente, Mascota, Raza o Tipo</label>
+            <input type="text" id="buscar" name="Buscar" value="@Model.Buscar" placeholder="Ej: Laura Gómez, Labrador, Reptil..." />
+        </div>
+
+        <div class="form-group">
+            <label for="orden">Ordenar por</label>
+            <div class="input-row">
+                <select id="orden" name="Orden">
+                    <option value="codigo" selected="@(string.IsNullOrEmpty(Model.Orden) || Model.Orden == "codigo")">Código (101 → 120)</option>
+                    <option value="precio_desc" selected="@(Model.Orden == "precio_desc")">Precio (Mayor a menor)</option>
+                    <option value="precio_asc" selected="@(Model.Orden == "precio_asc")">Precio (Menor a mayor)</option>
+                    <option value="nombre" selected="@(Model.Orden == "nombre")">Nombre (A → Z)</option>
+                </select>
+                <button type="submit" class="btn btn-secundario"><i class="fa-solid fa-filter"></i> Aplicar</button>
+                <a asp-page="/Vista" class="btn btn-outline">Limpiar</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="card">
+    @if (Model.Filas.Count == 0)
+    {
+        <div class="alerta alerta-vacio">No hay registros que coincidan con el filtro seleccionado.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Mascota</th>
+                        <th>Tipo</th>
+                        <th>Raza</th>
+                        <th>Edad</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Cliente Comprador</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var f in Model.Filas)
+                    {
+                        bool disponible = f.Estado == EstadosMascota.Disponible;
+                        <tr>
+                            <td><span class="codigo-tag">#@f.Codigo</span></td>
+                            <td><strong>@f.NombreMascota</strong></td>
+                            <td>@f.Tipo</td>
+                            <td>@f.Raza</td>
+                            <td>@f.Edad meses</td>
+                            <td class="precio-col">@f.Precio.ToString("C0", VistaModel.Pesos)</td>
+                            <td>
+                                <span class="badge @(disponible ? "badge-disponible" : "badge-vendida")">
+                                    @f.Estado
+                                </span>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(f.NombreCliente))
+                                {
+                                    <strong><i class="fa-solid fa-user"></i> @f.NombreCliente</strong>
+                                }
+                                else
+                                {
+                                    <span style="color:var(--color-gris); font-style:italic;">— En tienda —</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
