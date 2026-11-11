@@ -21,7 +21,7 @@ El proyecto tiene cuatro partes que comparten la misma base de datos:
 
 ```
 database/                         Scripts de la base de datos
-docs/                             Contrato de la API, guía de Git y guion de la demo
+docs/                             Contrato de la API y guía de Git
 src/
   TiernoTiranosaurio.Modelo/      Clases compartidas (Mascota, TipoMascota, Cliente...)
   TiernoTiranosaurio.Api/         API REST
