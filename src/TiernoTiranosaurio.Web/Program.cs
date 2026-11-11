@@ -8,13 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 
-// Configuración del cliente HTTP que consume la API (local o Azure)
-string urlApi = builder.Configuration["UrlApi"] ?? "https://localhost:7100/";
-if (!urlApi.EndsWith('/')) urlApi += "/";
-
+// Cliente HTTP sin límite global: ApiCliente maneja el timeout y el respaldo (Azure -> Local)
 builder.Services.AddHttpClient<ApiCliente>(client =>
 {
-    client.BaseAddress = new Uri(urlApi);
+    client.Timeout = Timeout.InfiniteTimeSpan;
 });
 
 var app = builder.Build();

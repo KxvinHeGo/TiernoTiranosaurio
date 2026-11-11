@@ -6,24 +6,27 @@
 
 <div class="page-header">
     <div>
-        <h2 class="page-title">🔍 Consulta de Mascotas</h2>
-        <p class="page-subtitle">Búsqueda por código exacto (<code>GET api/mascotas/{codigo}</code>) o por nombre (<code>GET api/mascotas?nombre=...</code>)</p>
+        <h2 class="page-title"><i class="fa-solid fa-magnifying-glass"></i> Consulta de Mascotas</h2>
     </div>
-    <a asp-page="/Consulta" class="btn btn-outline">🔄 Mostrar todas</a>
+    <a asp-page="/Consulta" class="btn btn-outline">
+        <i class="fa-solid fa-rotate"></i> Mostrar todas
+    </a>
 </div>
 
 @if (!string.IsNullOrEmpty(Model.ErrorApi))
 {
-    <div class="alerta alerta-error">⚠️ @Model.ErrorApi</div>
+    <div class="alerta alerta-error"><i class="fa-solid fa-triangle-exclamation"></i> @Model.ErrorApi</div>
 }
 
 <div class="card">
     <div class="search-grid">
         <form method="get" class="form-group">
-            <label for="codigo">Buscar por Código Exacto (101 - 120)</label>
+            <label for="codigo">Buscar por Código</label>
             <div class="input-row">
                 <input type="number" id="codigo" name="Codigo" value="@Model.Codigo" min="1" placeholder="Ej: 101" />
-                <button type="submit" class="btn btn-secundario">Buscar Código</button>
+                <button type="submit" class="btn btn-secundario">
+                    <i class="fa-solid fa-hashtag"></i> Buscar Código
+                </button>
             </div>
         </form>
 
@@ -31,7 +34,9 @@
             <label for="nombre">Buscar por Nombre de la Mascota</label>
             <div class="input-row">
                 <input type="text" id="nombre" name="Nombre" value="@Model.Nombre" placeholder="Ej: Rex, Luna, Thor..." />
-                <button type="submit" class="btn btn-primario">Buscar Nombre</button>
+                <button type="submit" class="btn btn-primario">
+                    <i class="fa-solid fa-magnifying-glass"></i> Buscar Nombre
+                </button>
             </div>
         </form>
     </div>
