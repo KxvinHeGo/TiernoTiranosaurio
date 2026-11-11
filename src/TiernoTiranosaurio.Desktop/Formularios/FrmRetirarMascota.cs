@@ -25,7 +25,7 @@ public class FrmRetirarMascota : Form
 
         txtCodigo = new TextBox { Location = new Point(80, 15), Width = 80 };
         lblDatos = new Label { Location = new Point(15, 55), Size = new Size(560, 40), Font = new Font(Font.FontFamily, 10) };
-        btnRetirar = Ui.Boton("Retirar", 590, 55, (s, e) => Retirar(), 115);
+        btnRetirar = Ui.Peligro(Ui.Boton("Retirar", 590, 55, (s, e) => Retirar(), 115));
         btnRetirar.Enabled = false;
         dgv = Ui.Grilla(15, 105, 690, 310);
         dgv.CellClick += (s, e) =>
@@ -36,11 +36,12 @@ public class FrmRetirarMascota : Form
         Controls.AddRange(new Control[]
         {
             Ui.Etiqueta("Código:", 15, 15), txtCodigo,
-            Ui.Boton("Buscar", 170, 13, (s, e) => Buscar(), 90),
+            Ui.Principal(Ui.Boton("Buscar", 170, 13, (s, e) => Buscar(), 90)),
             lblDatos, btnRetirar, dgv
         });
 
         txtCodigo.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; Buscar(); } };
+        Ui.Encabezado(this, "Retirar mascota");
         Load += (s, e) => Ui.Seguro(CargarLista);
     }
 

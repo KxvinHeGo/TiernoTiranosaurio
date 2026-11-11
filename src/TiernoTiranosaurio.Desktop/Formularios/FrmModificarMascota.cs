@@ -28,7 +28,7 @@ public class FrmModificarMascota : Form
         txtRaza = new TextBox { Location = new Point(110, 160), Width = 200, MaxLength = 50 };
         nudEdad = new NumericUpDown { Location = new Point(110, 195), Width = 80, Minimum = 0, Maximum = 300 };
         txtPrecio = new TextBox { Location = new Point(110, 230), Width = 140 };
-        btnGuardar = Ui.Boton("Guardar cambios", 110, 275, (s, e) => Guardar(), 130);
+        btnGuardar = Ui.Principal(Ui.Boton("Guardar cambios", 110, 275, (s, e) => Guardar(), 130));
         dgv = Ui.Grilla(330, 15, 475, 390);
         dgv.CellClick += (s, e) =>
         {
@@ -38,7 +38,7 @@ public class FrmModificarMascota : Form
         Controls.AddRange(new Control[]
         {
             Ui.Etiqueta("Código:", 15, 15), txtBuscar,
-            Ui.Boton("Buscar", 200, 13, (s, e) => Buscar(), 90),
+            Ui.Principal(Ui.Boton("Buscar", 200, 13, (s, e) => Buscar(), 90)),
             Ui.Etiqueta("Editando:", 15, 55), lblCodigo, lblEstado,
             Ui.Etiqueta("Nombre:", 15, 90), txtNombre,
             Ui.Etiqueta("Tipo:", 15, 125), cboTipo,
@@ -52,6 +52,7 @@ public class FrmModificarMascota : Form
         });
 
         txtBuscar.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; Buscar(); } };
+        Ui.Encabezado(this, "Cambiar datos de mascota");
         Load += (s, e) => Ui.Seguro(() =>
         {
             AccesoDatos.CargarTipos(cboTipo);
