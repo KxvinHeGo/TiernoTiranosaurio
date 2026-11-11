@@ -7,59 +7,72 @@
 <div class="page-header">
     <div>
         <h2 class="page-title">🦖 Bienvenido a El Tierno Tiranosaurio</h2>
-        <p class="page-subtitle">Sistema Web conectado en tiempo real a nuestra API REST y SQL Server</p>
     </div>
-    <a asp-page="/Vista" class="btn btn-primario"> Ver Vista General</a>
+    <a asp-page="/Vista" class="btn btn-primario">
+        <i class="fa-solid fa-table-list"></i> Ver Vista General
+    </a>
 </div>
 
 @if (!string.IsNullOrEmpty(Model.ErrorApi))
 {
     <div class="alerta alerta-error">
-         @Model.ErrorApi
+        <i class="fa-solid fa-triangle-exclamation"></i> @Model.ErrorApi
     </div>
 }
 
 <div class="stats-grid">
     <div class="stat-card">
-        <span class="stat-label">Total Mascotas</span>
+        <span class="stat-label"><i class="fa-solid fa-paw"></i> Total Mascotas</span>
         <span class="stat-value">@Model.TotalMascotas</span>
     </div>
     <div class="stat-card acento">
-        <span class="stat-label">Disponibles</span>
+        <span class="stat-label"><i class="fa-solid fa-circle-check"></i> Disponibles</span>
         <span class="stat-value">@Model.Disponibles</span>
     </div>
     <div class="stat-card coral">
-        <span class="stat-label">Vendidas</span>
+        <span class="stat-label"><i class="fa-solid fa-tag"></i> Vendidas</span>
         <span class="stat-value">@Model.Vendidas</span>
     </div>
     <div class="stat-card secundario">
-        <span class="stat-label">Tipos de Mascota</span>
+        <span class="stat-label"><i class="fa-solid fa-shapes"></i> Tipos de Mascota</span>
         <span class="stat-value">@Model.TotalTipos</span>
     </div>
 </div>
 
 <div class="search-grid">
     <div class="card">
-        <h3 style="margin-top:0; color: var(--color-secundario);"> 1. Consulta de Mascotas</h3>
+        <h3 style="margin-top:0; color: var(--color-secundario);">
+            <i class="fa-solid fa-magnifying-glass"></i> 1. Consulta de Mascotas
+        </h3>
         <p style="color: var(--color-gris); font-size: 0.93rem;">
-            Busca mascotas por su <strong>código exacto</strong> (101 al 120) o filtra por coincidencias en su <strong>nombre</strong>.
+            Busca mascotas por su <strong>código</strong> o por su <strong>nombre</strong>.
         </p>
-        <a asp-page="/Consulta" class="btn btn-primario">Ir a Consulta →</a>
+        <a asp-page="/Consulta" class="btn btn-primario">
+            Ir a Consulta <i class="fa-solid fa-arrow-right"></i>
+        </a>
     </div>
 
     <div class="card">
-        <h3 style="margin-top:0; color: var(--color-secundario);"> 2. Maestro-Detalle</h3>
+        <h3 style="margin-top:0; color: var(--color-secundario);">
+            <i class="fa-solid fa-layer-group"></i> 2. Maestro-Detalle
+        </h3>
         <p style="color: var(--color-gris); font-size: 0.93rem;">
-            Selecciona un <strong>Tipo de Mascota</strong> (Perro, Gato, Ave, Pez, Roedor, Reptil) y explora las mascotas asociadas.
+            Selecciona un <strong>Tipo de Mascota</strong> y consulta las mascotas de esa categoría.
         </p>
-        <a asp-page="/MaestroDetalle" class="btn btn-primario">Ir a Maestro-Detalle →</a>
+        <a asp-page="/MaestroDetalle" class="btn btn-primario">
+            Ir a Maestro-Detalle <i class="fa-solid fa-arrow-right"></i>
+        </a>
     </div>
 
     <div class="card">
-        <h3 style="margin-top:0; color: var(--color-secundario);"> 3. Vista SQL (vw_MascotasDetalle)</h3>
+        <h3 style="margin-top:0; color: var(--color-secundario);">
+            <i class="fa-solid fa-table-list"></i> 3. Vista General
+        </h3>
         <p style="color: var(--color-gris); font-size: 0.93rem;">
-            Visualiza el cruce completo entre <strong>Mascota</strong>, <strong>TipoMascota</strong> y el <strong>Cliente</strong> comprador.
+            Visualiza el listado detallado de mascotas, su tipo y el cliente comprador.
         </p>
-        <a asp-page="/Vista" class="btn btn-primario">Ir a la Vista →</a>
+        <a asp-page="/Vista" class="btn btn-primario">
+            Ir a la Vista <i class="fa-solid fa-arrow-right"></i>
+        </a>
     </div>
 </div>

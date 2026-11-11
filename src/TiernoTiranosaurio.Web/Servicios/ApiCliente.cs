@@ -5,11 +5,32 @@ using TiernoTiranosaurio.Modelo;
 namespace TiernoTiranosaurio.Web.Servicios;
 
 /// <summary>
-/// Cliente HTTP centralizado para consumir los endpoints de TiernoTiranosaurio.Api.
-/// Sigue el contrato definido en docs/CONTRATO_API.md.
+/// Cliente HTTP para consumir TiernoTiranosaurio.Api.
+/// Intenta primero con UrlApi (Azure) y, si falla por conexión, timeout o error 5xx,
+/// reintenta automáticamente con UrlApiRespaldo (API local).
 /// </summary>
-public class ApiCliente(HttpClient http)
+public class ApiCliente
 {
+    private readonly HttpClient _http;
+    private readonly string[] _urlsBase;
+
+    public ApiCliente(HttpClient http, IConfiguration config)
+    {
+        _http = http;
+
+        string principal = NormalizarUrl(
+            config["UrlApi"],
+            "https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/");
+
+        string respaldo = NormalizarUrl(
+            config["UrlApiRespaldo"],
+            "https://localhost:7100/");
+
+        _urlsBase = string.Equals(principal, respaldo, StringComparison.OrdinalIgnoreCase)
+            ? [principal]
+            : [principal, respaldo];
+    }
+
     /// <summary>
     /// GET api/mascotas?nombre=...&idTipo=...
     /// </summary>
@@ -21,11 +42,11 @@ public class ApiCliente(HttpClient http)
         if (idTipo.HasValue && idTipo.Value > 0)
             parametros.Add($"idTipo={idTipo.Value}");
 
-        string url = "api/mascotas";
+        string ruta = "api/mascotas";
         if (parametros.Count > 0)
-            url += "?" + string.Join("&", parametros);
+            ruta += "?" + string.Join("&", parametros);
 
-        return await http.GetFromJsonAsync<List<Mascota>>(url) ?? [];
+        return await ObtenerConRespaldoAsync<List<Mascota>>(ruta) ?? [];
     }
 
     /// <summary>
@@ -33,12 +54,7 @@ public class ApiCliente(HttpClient http)
     /// </summary>
     public async Task<Mascota?> ObtenerPorCodigoAsync(int codigo)
     {
-        var respuesta = await http.GetAsync($"api/mascotas/{codigo}");
-        if (respuesta.StatusCode == HttpStatusCode.NotFound)
-            return null;
-
-        respuesta.EnsureSuccessStatusCode();
-        return await respuesta.Content.ReadFromJsonAsync<Mascota>();
+        return await ObtenerConRespaldoAsync<Mascota>($"api/mascotas/{codigo}", permitir404: true);
     }
 
     /// <summary>
@@ -46,7 +62,7 @@ public class ApiCliente(HttpClient http)
     /// </summary>
     public async Task<List<TipoMascota>> ListarTiposAsync()
     {
-        return await http.GetFromJsonAsync<List<TipoMascota>>("api/tiposmascota") ?? [];
+        return await ObtenerConRespaldoAsync<List<TipoMascota>>("api/tiposmascota") ?? [];
     }
 
     /// <summary>
@@ -54,6 +70,51 @@ public class ApiCliente(HttpClient http)
     /// </summary>
     public async Task<List<VistaMascotaDetalle>> ListarVistaDetalleAsync()
     {
-        return await http.GetFromJsonAsync<List<VistaMascotaDetalle>>("api/vistamascotas") ?? [];
+        return await ObtenerConRespaldoAsync<List<VistaMascotaDetalle>>("api/vistamascotas") ?? [];
     }
+
+    private async Task<T?> ObtenerConRespaldoAsync<T>(string rutaRelativa, bool permitir404 = false)
+    {
+        Exception? ultimoError = null;
+
+        foreach (string urlBase in _urlsBase)
+        {
+            TimeSpan limite = EsLocal(urlBase) ? TimeSpan.FromSeconds(8) : TimeSpan.FromSeconds(15);
+            using var cts = new CancellationTokenSource(limite);
+
+            try
+            {
+                Uri url = new(new Uri(urlBase), rutaRelativa);
+                using HttpResponseMessage respuesta = await _http.GetAsync(url, cts.Token);
+
+                if (permitir404 && respuesta.StatusCode == HttpStatusCode.NotFound)
+                    return default;
+
+                // Si el servidor responde 5xx (ej. BD de Azure apagada o error interno), probar el respaldo
+                if ((int)respuesta.StatusCode >= 500)
+                {
+                    ultimoError = new HttpRequestException($"El servidor respondió {(int)respuesta.StatusCode} ({respuesta.StatusCode}).");
+                    continue;
+                }
+
+                respuesta.EnsureSuccessStatusCode();
+                return await respuesta.Content.ReadFromJsonAsync<T>(cancellationToken: cts.Token);
+            }
+            catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException or OperationCanceledException)
+            {
+                ultimoError = ex;
+            }
+        }
+
+        throw ultimoError ?? new HttpRequestException("No se pudo conectar con ninguna API configurada.");
+    }
+
+    private static string NormalizarUrl(string? url, string porDefecto)
+    {
+        string valor = string.IsNullOrWhiteSpace(url) ? porDefecto : url.Trim();
+        return valor.EndsWith('/') ? valor : valor + "/";
+    }
+
+    private static bool EsLocal(string url) =>
+        url.Contains("localhost", StringComparison.OrdinalIgnoreCase) || url.Contains("127.0.0.1");
 }
