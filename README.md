@@ -21,7 +21,6 @@ El proyecto tiene cuatro partes que comparten la misma base de datos:
 
 ```
 database/                         Scripts de la base de datos
-docs/                             Contrato de la API y guía de Git
 src/
   TiernoTiranosaurio.Modelo/      Clases compartidas (Mascota, TipoMascota, Cliente...)
   TiernoTiranosaurio.Api/         API REST
@@ -43,11 +42,11 @@ Publicada en:
 | GET | `/api/tiposmascota` | Tipos de mascota. |
 | GET | `/api/vistamascotas` | Contenido de la vista `vw_MascotasDetalle`. |
 
-El detalle de cada endpoint está en [docs/CONTRATO_API.md](docs/CONTRATO_API.md).
-
 ## Cómo ejecutarlo
 
 Requisitos: Visual Studio 2022 con .NET 8, SQL Server y SQL Server Management Studio.
+
+> **Antes de ejecutar:** abrir el Swagger de la API en Azure (`https://tiernotiranosaurio-api-kevin-feapesdphzg4dfcg.brazilsouth-01.azurewebsites.net/swagger`) y probar `GET /api/vistamascotas` con **Try it out → Execute**. Azure apaga la API cuando no se usa y la primera petición tarda en responder; haciéndolo antes, el login de escritorio y la web cargan rápido.
 
 1. Abrir en SSMS `database/BD_TiernoTiranosaurio.sql` y ejecutarlo (F5). En local crea la base de datos con sus tablas, datos de prueba y vista; en Azure se ejecuta conectado a la base `TiernoTiranosaurio`.
 2. En `src/TiernoTiranosaurio.Desktop`, copiar `conexion.ejemplo.json` como `conexion.json` y poner el nombre del servidor SQL.
