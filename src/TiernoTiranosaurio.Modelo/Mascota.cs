@@ -1,16 +1,15 @@
 namespace TiernoTiranosaurio.Modelo;
 
-/// <summary>Tabla Mascota.</summary>
 public class Mascota
 {
-    public int Codigo { get; set; }              // PK
+    public int Codigo { get; set; }
     public string Nombre { get; set; } = "";
-    public int IdTipo { get; set; }              // FK -> TipoMascota
+    public int IdTipo { get; set; }
     public string Raza { get; set; } = "";
-    public int Edad { get; set; }                // en meses
+    public int Edad { get; set; } 
     public decimal Precio { get; set; }
     public string Estado { get; set; } = EstadosMascota.Disponible;
-    public int? IdCliente { get; set; }          // FK -> Cliente (null si no se ha vendido)
+    public int? IdCliente { get; set; }
 }
 
 public static class EstadosMascota

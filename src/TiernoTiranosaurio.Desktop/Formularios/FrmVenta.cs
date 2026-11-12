@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>Venta: elegir cliente y mascota y hacer UPDATE con Estado = 'Vendida'. (Integrante 2)</summary>
+/// <summary>Venta: elegir cliente y mascota y hacer UPDATE con Estado = 'Vendida'.</summary>
 public class FrmVenta : Form
 {
     private readonly ComboBox cboCliente, cboMascota;

@@ -2,12 +2,12 @@ using System.Globalization;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>Utilidades de pantalla compartidas por los formularios de Arturo (Integrante 2).</summary>
+/// <summary>Utilidades de pantalla compartidas por los formularios.</summary>
 internal static class Ui
 {
     public static readonly CultureInfo Pesos = new CultureInfo("es-CO");
 
-    // Colores del Login y el Menú de Kevin, para que toda la app se vea igual.
+    // Mismos colores del Login y el Menú, para que toda la app se vea igual.
     public static readonly Color Verde = Color.FromArgb(46, 125, 50);        // #2E7D32
     public static readonly Color VerdeClaro = Color.FromArgb(232, 245, 233); // #E8F5E9
     public static readonly Color VerdeSeleccion = Color.FromArgb(200, 230, 201);

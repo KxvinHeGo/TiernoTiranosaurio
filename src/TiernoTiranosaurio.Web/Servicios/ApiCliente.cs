@@ -4,11 +4,7 @@ using TiernoTiranosaurio.Modelo;
 
 namespace TiernoTiranosaurio.Web.Servicios;
 
-/// <summary>
-/// Cliente HTTP para consumir TiernoTiranosaurio.Api.
-/// Intenta primero con UrlApi (Azure) y, si falla por conexión, timeout o error 5xx,
-/// reintenta automáticamente con UrlApiRespaldo (API local).
-/// </summary>
+/// <summary>Cliente de la API: usa UrlApi (Azure) y, si falla, UrlApiRespaldo (local).</summary>
 public class ApiCliente
 {
     private readonly HttpClient _http;
@@ -31,9 +27,6 @@ public class ApiCliente
             : [principal, respaldo];
     }
 
-    /// <summary>
-    /// GET api/mascotas?nombre=...&idTipo=...
-    /// </summary>
     public async Task<List<Mascota>> ListarMascotasAsync(string? nombre = null, int? idTipo = null)
     {
         var parametros = new List<string>();
@@ -49,25 +42,16 @@ public class ApiCliente
         return await ObtenerConRespaldoAsync<List<Mascota>>(ruta) ?? [];
     }
 
-    /// <summary>
-    /// GET api/mascotas/{codigo} (devuelve null si responde 404 Not Found).
-    /// </summary>
     public async Task<Mascota?> ObtenerPorCodigoAsync(int codigo)
     {
         return await ObtenerConRespaldoAsync<Mascota>($"api/mascotas/{codigo}", permitir404: true);
     }
 
-    /// <summary>
-    /// GET api/tiposmascota (Maestro del Maestro-Detalle).
-    /// </summary>
     public async Task<List<TipoMascota>> ListarTiposAsync()
     {
         return await ObtenerConRespaldoAsync<List<TipoMascota>>("api/tiposmascota") ?? [];
     }
 
-    /// <summary>
-    /// GET api/vistamascotas (filas de la vista SQL vw_MascotasDetalle).
-    /// </summary>
     public async Task<List<VistaMascotaDetalle>> ListarVistaDetalleAsync()
     {
         return await ObtenerConRespaldoAsync<List<VistaMascotaDetalle>>("api/vistamascotas") ?? [];
@@ -90,7 +74,6 @@ public class ApiCliente
                 if (permitir404 && respuesta.StatusCode == HttpStatusCode.NotFound)
                     return default;
 
-                // Si el servidor responde 5xx (ej. BD de Azure apagada o error interno), probar el respaldo
                 if ((int)respuesta.StatusCode >= 500)
                 {
                     ultimoError = new HttpRequestException($"El servidor respondió {(int)respuesta.StatusCode} ({respuesta.StatusCode}).");

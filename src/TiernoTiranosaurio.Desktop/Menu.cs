@@ -1,14 +1,6 @@
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>
-/// Formulario principal (Maestro MDI). Contiene el menú con los procesos de la tienda
-/// y habilita o bloquea opciones según el rol de quien inició sesión.
-/// Responsable: Kevin (Integrante 1). Los formularios hijos son de Arturo (carpeta Formularios/).
-///
-/// Roles:
-///   Administrador → todo
-///   Vendedor      → Consulta y Novedades (Actualización bloqueada)
-/// </summary>
+/// <summary>Formulario principal (MDI). Administrador: todo. Vendedor: Consulta y Novedades.</summary>
 public partial class Menu : Form
 {
     /// <summary>True si el usuario eligió "Cerrar sesión" (Program.cs vuelve a mostrar el Login).</summary>

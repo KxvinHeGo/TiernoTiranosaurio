@@ -2,13 +2,7 @@ using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Api.Datos;
 
-/// <summary>
-/// Acceso a la base de datos de la API (ADO.NET con SqlConnection).
-/// La cadena sale de ConnectionStrings:TiernoTiranosaurio
-///   - appsettings.json        → valor por defecto (localhost\SQLEXPRESS)
-///   - appsettings.Local.json  → el de cada PC (no se sube a GitHub)
-///   - Azure                   → App Service → Configuración → Cadenas de conexión
-/// </summary>
+/// <summary>Acceso a la base de datos de la API (ADO.NET con SqlConnection).</summary>
 public class BaseDatos
 {
     private readonly string cadena;

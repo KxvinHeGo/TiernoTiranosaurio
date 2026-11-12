@@ -6,15 +6,7 @@ using TiernoTiranosaurio.Modelo;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>
-/// Inicio de sesión con PLANES AUTOMÁTICOS. Responsable: Kevin (Integrante 1).
-///
-///   Plan A, B...  → las APIs de conexion.json ("UrlsApi"), en orden (ej: Azure y luego local)
-///   Plan final    → CONTINGENCIA: si ninguna API responde, valida directo en la tabla Usuarios
-///
-/// Si una API responde "usuario o clave incorrectos" (401) NO se prueba la siguiente:
-/// eso no es una caída, es un error del usuario.
-/// </summary>
+/// <summary>Inicio de sesión: prueba las APIs en orden y, si ninguna responde, valida directo en la BD.</summary>
 public partial class Login : Form
 {
     // Sin límite global: cada intento tiene su propio tiempo máximo
