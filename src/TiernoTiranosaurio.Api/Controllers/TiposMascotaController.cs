@@ -8,7 +8,7 @@ namespace TiernoTiranosaurio.Api.Controllers;
 [Route("api/tiposmascota")]
 public class TiposMascotaController(BaseDatos bd) : ControllerBase
 {
-    // GET api/tiposmascota  -> lista de tipos (Maestro del Maestro-Detalle)
+    // GET api/tiposmascota
     [HttpGet]
     public ActionResult<List<TipoMascota>> Listar()
     {

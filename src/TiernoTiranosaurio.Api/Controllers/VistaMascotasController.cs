@@ -8,7 +8,7 @@ namespace TiernoTiranosaurio.Api.Controllers;
 [Route("api/vistamascotas")]
 public class VistaMascotasController(BaseDatos bd) : ControllerBase
 {
-    // GET api/vistamascotas  -> filas de la vista SQL vw_MascotasDetalle
+    // GET api/vistamascotas
     [HttpGet]
     public ActionResult<List<VistaMascotaDetalle>> Listar()
     {

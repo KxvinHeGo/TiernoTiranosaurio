@@ -2,15 +2,7 @@ using System.Text.Json;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>
-/// Lee la configuración de cada PC desde conexion.json (no se sube a GitHub).
-///
-///   "UrlsApi":         lista de APIs de login, en orden de preferencia (Plan A, Plan B...)
-///   "CadenasConexion": lista de bases de datos, en orden de preferencia (Plan A, Plan B...)
-///
-/// También acepta el formato viejo con un solo valor: "UrlApi" y "CadenaConexion".
-/// Para crearlo: copiar conexion.ejemplo.json → conexion.json y ajustar los valores.
-/// </summary>
+/// <summary>Lee la configuración de cada PC desde conexion.json (UrlsApi y CadenasConexion).</summary>
 public static class Configuracion
 {
     private const string Archivo = "conexion.json";

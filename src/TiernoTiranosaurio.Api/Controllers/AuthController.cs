@@ -17,8 +17,6 @@ public class AuthController(BaseDatos bd) : ControllerBase
         if (string.IsNullOrWhiteSpace(request.Usuario) || string.IsNullOrWhiteSpace(request.Clave))
             return Unauthorized();
 
-        // La clave se compara cifrada (SHA-256), igual que como se guardó en el script.
-        // IMPORTANTE: @clave debe ser VARCHAR (no NVARCHAR); si no, el hash sale distinto.
         var usuarios = bd.Consultar(
             @"SELECT NombreUsuario, Rol
               FROM Usuarios

@@ -3,11 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>
-/// Retirar mascota con confirmación y DELETE. (Integrante 2)
-/// Es DELETE porque en el contrato de la Fase 0 Estado solo puede ser 'Disponible' o 'Vendida'
-/// (no existe un estado de baja). Solo se retiran mascotas Disponibles: una vendida es historial de venta.
-/// </summary>
+/// <summary>Retirar mascota con confirmación y DELETE. Solo se retiran mascotas Disponibles.</summary>
 public class FrmRetirarMascota : Form
 {
     private readonly TextBox txtCodigo;

@@ -7,6 +7,5 @@
   ],
   "CadenasConexion": [
     "Server=localhost\\SQLEXPRESS;Database=TiernoTiranosaurio;Trusted_Connection=True;TrustServerCertificate=True;Connect Timeout=5;"
-  ],
-  "_plan_b_bd": "Opcional: agreguen como SEGUNDO elemento de CadenasConexion la cadena de Azure SQL (pídansela a Kevin por el chat, NUNCA en GitHub)."
+  ]
 }

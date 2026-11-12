@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>Consulta de mascotas por código y por nombre. (Integrante 2)</summary>
+/// <summary>Consulta de mascotas por código y por nombre.</summary>
 public class FrmConsulta : Form
 {
     private readonly TextBox txtCodigo;

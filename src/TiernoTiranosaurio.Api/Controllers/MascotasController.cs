@@ -10,10 +10,9 @@ namespace TiernoTiranosaurio.Api.Controllers;
 [Route("api/mascotas")]
 public class MascotasController(BaseDatos bd) : ControllerBase
 {
-    // GET api/mascotas                 -> todas
-    // GET api/mascotas?nombre=re       -> nombre contiene "re"
-    // GET api/mascotas?idTipo=1        -> solo perros (Detalle del Maestro-Detalle)
-    // Los filtros se pueden combinar.
+    // GET api/mascotas
+    // GET api/mascotas?nombre=re
+    // GET api/mascotas?idTipo=1
     [HttpGet]
     public ActionResult<List<Mascota>> Listar([FromQuery] string? nombre, [FromQuery] int? idTipo)
     {
@@ -32,7 +31,7 @@ public class MascotasController(BaseDatos bd) : ControllerBase
         return Ok(lista);
     }
 
-    // GET api/mascotas/101  -> una mascota por código (404 si no existe)
+    // GET api/mascotas/101
     [HttpGet("{codigo:int}")]
     public ActionResult<Mascota> PorCodigo(int codigo)
     {

@@ -1,6 +1,4 @@
 namespace TiernoTiranosaurio.Modelo;
-
-/// <summary>Una fila de la vista SQL vw_MascotasDetalle (Mascota + TipoMascota + Cliente).</summary>
 public class VistaMascotaDetalle
 {
     public int Codigo { get; set; }
@@ -10,5 +8,5 @@ public class VistaMascotaDetalle
     public int Edad { get; set; }
     public decimal Precio { get; set; }
     public string Estado { get; set; } = "";
-    public string? NombreCliente { get; set; }   // null si la mascota está disponible
+    public string? NombreCliente { get; set; }
 }

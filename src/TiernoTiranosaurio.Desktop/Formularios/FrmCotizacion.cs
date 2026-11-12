@@ -2,10 +2,7 @@ using System.Data;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>
-/// Cotización: calcula subtotal, descuento, IVA y total SOLO en pantalla.
-/// No lee ni escribe en la base de datos. (Integrante 2)
-/// </summary>
+/// <summary>Cotización: calcula subtotal, descuento, IVA y total en pantalla, sin usar la BD.</summary>
 public class FrmCotizacion : Form
 {
     private const decimal TasaIva = 0.19m;

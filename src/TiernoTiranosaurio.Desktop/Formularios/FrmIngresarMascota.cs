@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>Ingresar mascota: ComboBox cargado desde TipoMascota + INSERT. (Integrante 2)</summary>
+/// <summary>Ingresar mascota: ComboBox cargado desde TipoMascota + INSERT.</summary>
 public class FrmIngresarMascota : Form
 {
     private readonly TextBox txtNombre, txtRaza, txtPrecio;

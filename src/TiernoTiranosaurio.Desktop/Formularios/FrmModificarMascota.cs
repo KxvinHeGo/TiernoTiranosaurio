@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>Cambiar datos: buscar la mascota, editar y hacer el UPDATE. (Integrante 2)</summary>
+/// <summary>Cambiar datos: buscar la mascota, editar y hacer el UPDATE.</summary>
 public class FrmModificarMascota : Form
 {
     private readonly TextBox txtBuscar, txtNombre, txtRaza, txtPrecio;

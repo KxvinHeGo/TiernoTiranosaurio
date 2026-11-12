@@ -21,7 +21,7 @@ public class VistaModel(ApiCliente api) : PageModel
 
     public List<VistaMascotaDetalle> Filas { get; private set; } = [];
 
-    // Extra 1: Indicadores financieros calculados con LINQ en C#
+    // Indicadores financieros calculados con LINQ
     public decimal TotalRecaudadoVentas { get; private set; }
     public decimal ValorInventarioDisponible { get; private set; }
     public int CantidadDisponibles { get; private set; }
@@ -54,7 +54,7 @@ public class VistaModel(ApiCliente api) : PageModel
                     string.Equals(f.Estado, EstadoFiltro, StringComparison.OrdinalIgnoreCase));
             }
 
-            // Extra 2: Filtro por texto (Mascota, Cliente comprador, Raza o Tipo)
+            // Filtro por texto (Mascota, Cliente comprador, Raza o Tipo)
             if (!string.IsNullOrWhiteSpace(Buscar))
             {
                 string texto = Buscar.Trim();

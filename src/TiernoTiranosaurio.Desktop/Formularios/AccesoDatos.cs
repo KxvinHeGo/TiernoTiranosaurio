@@ -3,12 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace TiernoTiranosaurio.Desktop;
 
-/// <summary>
-/// Ayudante de datos de los formularios de Arturo (Integrante 2).
-/// Todas las consultas van con SqlParameter: nunca se concatena texto del usuario en el SQL.
-///
-/// La conexión la da DataBase.cs (Kevin), que lee el conexion.json de cada PC.
-/// </summary>
+/// <summary>Consultas de los formularios. Todo el SQL usa SqlParameter.</summary>
 internal static class AccesoDatos
 {
     private static SqlConnection Conexion() => DataBase.ObtenerConexion();

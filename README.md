@@ -49,7 +49,7 @@ El detalle de cada endpoint está en [docs/CONTRATO_API.md](docs/CONTRATO_API.md
 
 Requisitos: Visual Studio 2022 con .NET 8, SQL Server y SQL Server Management Studio.
 
-1. Crear la base de datos local ejecutando en SSMS `database/00_crear_bd_local.sql` y después `database/BD_TiernoTiranosaurio.sql`.
+1. Abrir en SSMS `database/BD_TiernoTiranosaurio.sql` y ejecutarlo (F5). En local crea la base de datos con sus tablas, datos de prueba y vista; en Azure se ejecuta conectado a la base `TiernoTiranosaurio`.
 2. En `src/TiernoTiranosaurio.Desktop`, copiar `conexion.ejemplo.json` como `conexion.json` y poner el nombre del servidor SQL.
 3. Si se va a usar la API local, en `src/TiernoTiranosaurio.Api` copiar `appsettings.Local.ejemplo.json` como `appsettings.Local.json` y hacer lo mismo.
 4. Abrir `TiernoTiranosaurio.sln`, elegir los proyectos de inicio (Desktop, Web y, si se necesita, Api) y ejecutar.
